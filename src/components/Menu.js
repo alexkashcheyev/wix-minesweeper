@@ -1,38 +1,43 @@
 import React, { Component } from 'react';
-import { Drawer, TextField, makeStyles, styled, withStyles, List, ListItem, IconButton, ListItemSecondaryAction, ListItemText, Button, Icon } from '@material-ui/core';
+import { Drawer, makeStyles, List, ListItem, IconButton, ListItemSecondaryAction, ListItemText, Button, Icon } from '@material-ui/core';
 import NewGame from './NewGame';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import CheckBoxOutlineBlankRoundedIcon from '@material-ui/icons/CheckBoxOutlineBlankRounded';
 import CheckBoxRoundedIcon from '@material-ui/icons/CheckBoxRounded';
+import config from '../appconfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         
     },
+    list: {
+    },
     listItem: {
+        minWidth: '20rem',
+    },
+    listItemText: {
         padding: theme.spacing(2)
     },
-    formRow: {
-        padding: theme.spacing(2)
+    drawer: {
     }
 }));
 
 function Menu({ open, superman, dispatch }) {
-    
+
     const classes = useStyles();
 
     const hideMenu = (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-
         dispatch(actions.toggleMenu(false));
     }
 
     const toggleSuperman = (event) => {
         dispatch(actions.toggleSuperman(!superman));
+
+        if (config.autoCloseMenu) {
+            dispatch(actions.toggleMenu(false));
+        }
     }
 
     const supermanCheckboxIcon = superman ? (
@@ -45,14 +50,16 @@ function Menu({ open, superman, dispatch }) {
 
         <div className={classes.root}>
             <Drawer 
+                className={classes.drawer}
                 anchor='left' 
                 open={open}
                 variant='persistent'
-                onClose={hideMenu}>
+                onClose={hideMenu}
+                >
 
-                    <List>
+                    <List className={classes.list}>
 
-                        <ListItem>
+                        <ListItem className={classes.listItem}>
                             <ListItemText>&nbsp;</ListItemText>
                             <ListItemSecondaryAction>
                                 <IconButton
@@ -65,29 +72,12 @@ function Menu({ open, superman, dispatch }) {
                             </ListItemSecondaryAction>
                         </ListItem>
 
-                        <ListItem>
-                            <form>
-                                <div className={classes.formRow}>
-                                    <TextField id="new-field-width" label="Width" />
-                                </div>
-                                <div className={classes.formRow}>
-                                    <TextField id="new-field-height" label="Height" />
-                                </div>
-                                <div className={classes.formRow}>
-                                    <Button 
-                                        variant='contained'
-                                        color='primary'
-                                        fullWidth='true'>
-                                            
-                                            Start
-                                            
-                                    </Button>
-                                </div>
-                            </form>
+                        <ListItem className={classes.listItem}>
+                            <NewGame />
                         </ListItem>
 
-                        <ListItem button='true' onClick={toggleSuperman}>
-                            <ListItemText>
+                        <ListItem button='true' onClick={toggleSuperman} className={classes.listItem}>
+                            <ListItemText className={classes.listItemText}>
                                 Superman
                             </ListItemText>
                             <ListItemSecondaryAction>

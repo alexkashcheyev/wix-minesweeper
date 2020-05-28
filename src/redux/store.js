@@ -37,6 +37,15 @@ const rootReducer = (state = intialState, action) => {
                 }
             }
         
+        case actionType.CHANGE_NEW_GAME_PARAMETER:
+            return {
+                ...state,
+                newGame: {
+                    ...state.newGame,
+                    [action.payload.key] : [action.payload.value]
+                }
+            }
+        
     }
 
     return state;
