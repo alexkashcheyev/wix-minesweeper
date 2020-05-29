@@ -76,7 +76,7 @@ function Menu({ open, superman, dispatch }) {
                             <NewGame />
                         </ListItem>
 
-                        <ListItem button='true' onClick={toggleSuperman} className={classes.listItem}>
+                        <ListItem button={true} onClick={toggleSuperman} className={classes.listItem}>
                             <ListItemText className={classes.listItemText}>
                                 Superman
                             </ListItemText>

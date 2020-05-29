@@ -21,7 +21,7 @@ function NewGame({ width, height, mines, dispatch }) {
     const classes = useStyles();
     
     const { minWidth, maxWidth, minHeight, maxHeight, minMines, minFreeCells } = config;
-    const maxMines = width * height - config.minFreeCells;
+    const maxMines = width * height - minFreeCells;
     
     const widthError = () => width < minWidth || width > maxWidth;
     const heightError = () => height < minHeight || height > maxHeight;
@@ -30,6 +30,14 @@ function NewGame({ width, height, mines, dispatch }) {
 
     const changeParameter = (e) => {
         dispatch(actions.changeNewGameParameter(e.target.id, e.target.value))
+    }
+
+    const startGame = (e) => {
+        dispatch(actions.startGame({ width, height, mines }));
+
+        if (config.autoCloseMenu) {
+            dispatch(actions.toggleMenu(false));
+        }
     }
     
     return (
@@ -42,7 +50,7 @@ function NewGame({ width, height, mines, dispatch }) {
                     label='Width' 
                     type='number' 
                     value={width} 
-                    fullWidth='true'
+                    fullWidth={true}
                     inputProps={ {min: minWidth, max: maxWidth} }
                     error={ widthError() }
                     onChange={changeParameter}
@@ -57,7 +65,7 @@ function NewGame({ width, height, mines, dispatch }) {
                     label="Height" 
                     type='number' 
                     value={height}
-                    fullWidth='true'
+                    fullWidth={true}
                     inputProps={ {min: minHeight, max: maxHeight} }
                     error={ heightError() }
                     onChange={changeParameter}
@@ -72,7 +80,7 @@ function NewGame({ width, height, mines, dispatch }) {
                     label="Mines" 
                     type='number' 
                     value={mines}
-                    fullWidth='true'
+                    fullWidth={true}
                     inputProps={ {min: minMines, max: maxMines} }
                     error={ mineError() }
                     onChange={changeParameter}
@@ -80,12 +88,13 @@ function NewGame({ width, height, mines, dispatch }) {
 
             </div>
 
-            <div className={classes.formRow}>
+            <div className={classes.formRow} onSubmit={startGame}>
 
                 <Button 
                     variant='contained'
                     color='primary'
-                    fullWidth='true'
+                    fullWidth={true}
+                    onClick={startGame}
                     disabled={ anyError() }
                     >
                         
@@ -99,7 +108,7 @@ function NewGame({ width, height, mines, dispatch }) {
 
 const mapStateToProps = (state) => {
     return {
-        ...state.newGame
+        ...state.newGame.gameInfo
     }
 }
 

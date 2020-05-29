@@ -1,30 +1,45 @@
-import { act } from "react-dom/test-utils"
+import { actionType } from '../enums';
+import { generateField, openCellsFrom } from '../shared/field';
 
-export const actionType = {
-    TOGGLE_MENU : 'TOGGLE_MENU',
-    TOGGLE_SUPERMAN: 'TOGGLE_SUPERMAN',
-    CHANGE_NEW_GAME_PARAMETER: 'CHANGE_NEW_GAME_PARAMETER'
-}
+export const toggleMenu = (show) => ({
+    type: actionType.TOGGLE_MENU,
+    payload: show
+});
 
-export const toggleMenu = (show) => {
-    return {
-        type: actionType.TOGGLE_MENU,
-        payload: show
+export const toggleSuperman = (value) => ({
+    type: actionType.TOGGLE_SUPERMAN,
+    payload: value
+});
+
+export const changeNewGameParameter = (key, value) => ({
+    type: actionType.CHANGE_NEW_GAME_PARAMETER,
+    payload: {
+        key, value
     }
-}
+});
 
-export const toggleSuperman = (value) => {
-    return {
-        type: actionType.TOGGLE_SUPERMAN,
-        payload: value
-    }
-}
+export const startGame = (gameInfo) => {
+    const field = generateField(gameInfo);
 
-export const changeNewGameParameter = (key, value) => {
     return {
-        type: actionType.CHANGE_NEW_GAME_PARAMETER,
+        type: actionType.START_GAME,
         payload: {
-            key, value
+            gameInfo,
+            field
         }
+    }
+}
+
+export const toggleFlag = (x, y, value) => ({
+    type: actionType.TOGGLE_FLAG,
+    payload: { x, y, value }
+});
+
+export const openCells = (x, y, field) => {
+    const newField = openCellsFrom(x, y, field);
+
+    return {
+        type: actionType.OPEN_CELLS,
+        payload: { field: newField }
     }
 }

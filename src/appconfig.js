@@ -7,7 +7,9 @@ const appConfig = {
     minMines: 1,
     minFreeCells: 1,
 
-    autoCloseMenu: true
+    autoCloseMenu: true,
+
+    fontSizeToCellRatio: 0.5
 }
 
 export default appConfig;
