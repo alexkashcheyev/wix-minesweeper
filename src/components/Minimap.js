@@ -1,8 +1,16 @@
 import React from 'react';
+import { makeStyles, Paper } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        
+    }
+}))
 
 function Minimap() {
+    const classes = useStyles();
     return (
-        <h4>Minimap!</h4>
+        <div className={classes.root}>Minimap!</div>
     )
 }
 

@@ -2,10 +2,17 @@ import React from 'react';
 import { createStore } from 'redux';
 import { gameStage, actionType } from '../enums';
 import { validViewport, validViewportChange } from '../shared/viewport';
+import { clone } from 'lodash';
 
 const intialState = {
     ui: {
         showMenu: false,
+        message: {
+            severity: 'info',
+            visible: false,
+            title: '',
+            content: ''
+        }
     },
     currentGame: {
         gameInfo: {
@@ -87,35 +94,83 @@ const rootReducer = (state = intialState, action) => {
             }
 
         case actionType.TOGGLE_FLAG:
+            const { x, y } = action.payload;
+            const { field, flagsSet, gameInfo } = state.currentGame;
+            
+            // Can't flag an opened cell
+            if (field[x][y].isOpened) return state;
+            
+            // Taking the flag off
+            if (field[x][y].isFlagged) {
+                const newField = clone(field);
+                newField[x][y].isFlagged = false;
 
-            // doesn't look very good
-            // TODO: refactor
+                return {
+                    ...state,
+                    currentGame: {
+                        ...state.currentGame,
+                        flagsSet: flagsSet - 1,
+                        field: newField
+                    }
+                }
+            }
+
+            // Show message if no flags left
+            if (flagsSet === gameInfo.mines) {
+                return {
+                    ...state,
+                    ui: {
+                        ...state.ui,
+                        message: {
+                            visible: true,
+                            severity: 'warning',
+                            title: 'No flags left',
+                            content: 'You had just enough flags to flag all the mines.'
+                        }
+                    }
+                }
+            }
+
+            // At this point we will need to update the field
+
+            const newField = clone(field);
+            newField[x][y].isFlagged = true;
+            let newMessage = { visible: false }
+
+            // are all the mines flagged?
+
+            if (
+                // all the flags are set
+                flagsSet + 1 === gameInfo.mines
+
+                // and no flagged cells without mines exist
+                && !newField.find(
+                    (column, x) => column.find(
+                        (cell, y) => cell.isFlagged && !cell.hasMine
+                    )
+                )
+            ) {
+                newMessage = {
+                    visible: true,
+                    title: 'Congratulations!',
+                    content: 'You win!',
+                    severity: 'success'
+                }
+            }
+
             return {
                 ...state,
                 currentGame: {
                     ...state.currentGame,
-                    field: state.currentGame.field.map(
-
-                        (column, x) => {
-
-                            return column.map(
-
-                                (cell, y) => {
-                                    if (
-                                        x === action.payload.x
-                                        && y === action.payload.y
-                                    ) {
-                                        return {
-                                            ...cell,
-                                            isFlagged: action.payload.value
-                                        }
-                                    } else {
-                                        return cell;
-                                    }
-                                }
-                            )
-                        }
-                    )
+                    field: newField,
+                    flagsSet: flagsSet + 1
+                },
+                ui : {
+                    ...state.ui,
+                    message: {
+                        ...state.ui.message,
+                        ...newMessage
+                    }
                 }
             }
 
@@ -152,6 +207,18 @@ const rootReducer = (state = intialState, action) => {
             } else {
                 return state;
             }
+        }
+
+        case actionType.TOGGLE_MESSAGE: {
+
+            return {
+                ...state,
+                ui: {
+                    ...state.ui,
+                    message: action.payload
+                }
+            }
+            
         }
     }
 

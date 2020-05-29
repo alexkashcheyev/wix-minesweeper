@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Button } from '@material-ui/core';
+import { makeStyles, Button, Typography, Paper } from '@material-ui/core';
 import GameField from './GameField';
 import Minimap from './Minimap'
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ import KeyboardArrowUpRoundedIcon from '@material-ui/icons/KeyboardArrowUpRounde
 import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
 import KeyboardArrowDownRoundedIcon from '@material-ui/icons/KeyboardArrowDownRounded';
 import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
+import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,11 +19,15 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row'
     },
     panel : {
+        margin: theme.spacing(1),
         flex: '0',
         minWidth: '20rem',
         display: 'flex',
         flexDirection: 'column',
         padding: theme.spacing(1)
+    },
+    stats: {
+        marginBottom: theme.spacing(2)
     },
     minimap: {
         flex: '1'
@@ -45,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Viewport({ dispatch, viewport, gameInfo, stage }) {
+function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
 
     
     const classes = useStyles();
@@ -55,7 +60,6 @@ function Viewport({ dispatch, viewport, gameInfo, stage }) {
     }
 
     const handleKeyPress = (e) => {
-        console.log(e.code);
         
         let change = false;
 
@@ -81,14 +85,30 @@ function Viewport({ dispatch, viewport, gameInfo, stage }) {
         }
     });
 
-    let panel = '';
+    let stats = (
+        <div className={classes.stats}>
+            <Typography color='secondary' variant='h4' component='div'>
+                <FlagRoundedIcon /> &times; { gameInfo.mines - flagsSet }
+            </Typography>
+        </div>
+    );
+
+    let panel = (
+        <Paper className={classes.panel} variant='outlined'>
+            {stats}
+        </Paper>
+    );
     let key = 0;
 
     if (viewport.height < gameInfo.height || viewport.width < gameInfo.width) {
 
         panel =
             (
-                <div className={classes.panel}>
+                <Paper 
+                    variant='outlined'
+                    className={classes.panel}>
+
+                    {stats}
                     <div className={classes.minimap}>
                         <Minimap />
                     </div>
@@ -133,7 +153,7 @@ function Viewport({ dispatch, viewport, gameInfo, stage }) {
                             D
                         </Button>
                     </div>
-                </div>
+                </Paper>
             )
     }
 

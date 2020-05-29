@@ -4,16 +4,20 @@ import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import { Box, Container } from '@material-ui/core';
 import GameField from './components/GameField';
+import Message from './components/Message';
 import { makeStyles } from '@material-ui/core'
 import Viewport from './components/Viewport';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   container: {
-    marginTop: '10rem',
+    paddingTop: '10rem',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
+  },
+  box: {
+    position: 'relative'
   }
 }));
 
@@ -24,9 +28,12 @@ function App() {
     <div className="App">
       <Navbar />
       <Menu />
-      <Container className={classes.container}>
-        <Viewport />
-      </Container>
+      <Box className={classes.box}>
+        <Container className={classes.container}>
+          <Viewport />
+        </Container>
+        <Message />
+      </Box>
     </div>
   );
 }

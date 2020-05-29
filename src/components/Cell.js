@@ -58,7 +58,7 @@ function Cell({ cell, superman, size, onOpen, onFlag }) {
 
     if (!cell.isOpened && cell.isFlagged) {
         content = (
-            <FlagRoundedIcon className={classes.icon} />
+            <FlagRoundedIcon className={classes.icon} color='secondary' />
         )
     }
 

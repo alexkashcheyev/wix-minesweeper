@@ -22,6 +22,7 @@ function GameField({ field, dispatch, superman, gameInfo, viewport }) {
     const cellSize = '80px';
 
     function toggleFlag(x, y) {
+        console.log('toggle flag',x,y);
         dispatch(actions.toggleFlag(x, y, !field[x][y].isFlagged));
     }
 
@@ -52,7 +53,10 @@ function GameField({ field, dispatch, superman, gameInfo, viewport }) {
                         )
                 ).map((cell, y) => {
 
-                    const key = x + '_' + y;
+                    const realX = x + viewport.offset.x;
+                    const realY = y + viewport.offset.y;
+
+                    const key = realX + '_' + realY;
 
                     return (
                         <Cell
@@ -61,8 +65,8 @@ function GameField({ field, dispatch, superman, gameInfo, viewport }) {
                             cell={cell}
                             superman={superman}
                             size={cellSize}
-                            onFlag={() => { toggleFlag(x, y) }}
-                            onOpen={() => { open(x, y) }}
+                            onFlag={() => toggleFlag(realX, realY) }
+                            onOpen={() => open(realX, realY)}
                         />
                     )
                 });

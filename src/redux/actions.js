@@ -48,3 +48,8 @@ export const changeOffset = (dx, dy) => ({
     type: actionType.CHANGE_OFFSET,
     payload: { dx, dy }
 })
+
+export const toggleMessage = (visible, severity='info', title='', content='') => ({
+    type: actionType.TOGGLE_MESSAGE,
+    payload: { severity, visible, title, content }
+})

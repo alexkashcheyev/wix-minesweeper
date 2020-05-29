@@ -5,7 +5,8 @@ export const actionType = {
     START_GAME: 'START_GAME',
     TOGGLE_FLAG: 'TOGGLE_FLAG',
     OPEN_CELLS: 'OPEN_CELLS',
-    CHANGE_OFFSET: 'CHANGE_OFFSET'
+    CHANGE_OFFSET: 'CHANGE_OFFSET',
+    TOGGLE_MESSAGE: 'TOGGLE_MESSAGE'
 }
 
 export const gameStage = {

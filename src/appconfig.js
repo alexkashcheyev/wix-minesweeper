@@ -10,6 +10,7 @@ const appConfig = {
     autoCloseMenu: true,
 
     fontSizeToCellRatio: 0.5,
+    messageTimeout : 2500,
 }
 
 export default appConfig;
