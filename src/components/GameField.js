@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function GameField({ field, dispatch, superman, gameInfo }) {
+function GameField({ field, dispatch, superman, gameInfo, viewport }) {
     const classes = useStyles();
 
     const cellSize = '80px';
@@ -29,31 +29,50 @@ function GameField({ field, dispatch, superman, gameInfo }) {
         dispatch(actions.openCells(x, y, field));
     }
 
-    const columns = field.map((column, x) => {
+    const columns = field
 
-        const cells = column.map((cell, y) => {
+        // filter only visible columns
 
-            const key = x + '_' + y;
+        .filter(
+            (column, x) =>
+                gameInfo.width <= viewport.width
+                || (
+                    x >= viewport.offset.x
+                    && x < viewport.offset.x + viewport.width
+                )
+        ).map((column, x) => {
+
+            const cells = column.
+                filter(
+                    (cell, y) =>
+                        gameInfo.height <= viewport.height
+                        || (
+                            y >= viewport.offset.y
+                            && y < viewport.offset.y + viewport.height
+                        )
+                ).map((cell, y) => {
+
+                    const key = x + '_' + y;
+
+                    return (
+                        <Cell
+                            className={classes.cell}
+                            key={key}
+                            cell={cell}
+                            superman={superman}
+                            size={cellSize}
+                            onFlag={() => { toggleFlag(x, y) }}
+                            onOpen={() => { open(x, y) }}
+                        />
+                    )
+                });
 
             return (
-                <Cell
-                    className={classes.cell}
-                    key={key}
-                    cell={cell}
-                    superman={superman}
-                    size={cellSize}
-                    onFlag={() => { toggleFlag(x, y) }}
-                    onOpen={() => { open(x, y) }}
-                />
-            )
-        });
-
-        return (
-            <div className={classes.column} key={x}>
-                {cells}
-            </div>
-        );
-    })
+                <div className={classes.column} key={x}>
+                    {cells}
+                </div>
+            );
+        })
 
     return (
         <div className={classes.root} >
@@ -64,11 +83,7 @@ function GameField({ field, dispatch, superman, gameInfo }) {
 
 
 function mapStateToProps(state) {
-    return {
-        field: state.currentGame.field,
-        superman: state.currentGame.superman,
-        gameInfo: state.currentGame.gameInfo
-    }
+    return state.currentGame;
 }
 
 export default connect(mapStateToProps)(GameField)

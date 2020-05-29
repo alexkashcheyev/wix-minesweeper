@@ -5,6 +5,7 @@ import Menu from './components/Menu';
 import { Box, Container } from '@material-ui/core';
 import GameField from './components/GameField';
 import { makeStyles } from '@material-ui/core'
+import Viewport from './components/Viewport';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -18,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  
+
   return (
     <div className="App">
-        <Navbar />
-        <Menu />
-        <Container className={classes.container}>
-          <GameField />
-        </Container>
+      <Navbar />
+      <Menu />
+      <Container className={classes.container}>
+        <Viewport />
+      </Container>
     </div>
   );
 }

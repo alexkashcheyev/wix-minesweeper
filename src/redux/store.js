@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { gameStage, actionType } from '../enums';
+import { validViewport, validViewportChange } from '../shared/viewport';
 
 const intialState = {
     ui: {
@@ -12,6 +13,14 @@ const intialState = {
             height: 10,
             mines: 10
         },
+        viewport: {
+            width: 10,
+            height: 10,
+            offset: {
+                x: 0,
+                y: 0
+            },
+        },
         stage: gameStage.NOT_STARTED,
         superman: true,
         flagsSet: 0,
@@ -19,9 +28,9 @@ const intialState = {
     },
     newGame: {
         gameInfo: {
-            width: 100,
-            height: 100,
-            mines: 100
+            width: 12,
+            height: 12,
+            mines: 12
         }
     }
 }
@@ -66,7 +75,14 @@ const rootReducer = (state = intialState, action) => {
                     ...state.currentGame,
                     ...action.payload,
                     flagsSet: 0,
-                    stage: gameStage.WAITING
+                    stage: gameStage.WAITING,
+                    viewport: {
+                        ...state.currentGame.viewport,
+                        offset: {
+                            x: 0,
+                            y: 0
+                        }
+                    }
                 },
             }
 
@@ -112,6 +128,31 @@ const rootReducer = (state = intialState, action) => {
                 }
             }
 
+        case actionType.CHANGE_OFFSET: {
+            
+            if (
+                validViewportChange(state.currentGame.viewport, state.currentGame.gameInfo, action.payload.dx, action.payload.dy)
+            ) {
+                const newX = state.currentGame.viewport.offset.x + action.payload.dx;
+                const newY = state.currentGame.viewport.offset.y + action.payload.dy;
+
+                return {
+                    ...state,
+                    currentGame: {
+                        ...state.currentGame,
+                        viewport: {
+                            ...state.currentGame.viewport,
+                            offset: {
+                                x: newX,
+                                y: newY
+                            }
+                        }
+                    }
+                }
+            } else {
+                return state;
+            }
+        }
     }
 
     return state;

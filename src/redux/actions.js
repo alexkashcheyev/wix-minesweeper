@@ -43,3 +43,8 @@ export const openCells = (x, y, field) => {
         payload: { field: newField }
     }
 }
+
+export const changeOffset = (dx, dy) => ({
+    type: actionType.CHANGE_OFFSET,
+    payload: { dx, dy }
+})

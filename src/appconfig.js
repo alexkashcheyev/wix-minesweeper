@@ -9,7 +9,7 @@ const appConfig = {
 
     autoCloseMenu: true,
 
-    fontSizeToCellRatio: 0.5
+    fontSizeToCellRatio: 0.5,
 }
 
 export default appConfig;
