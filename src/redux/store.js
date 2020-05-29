@@ -42,9 +42,9 @@ const intialState = {
     },
     newGame: {
         gameInfo: {
-            width: 12,
-            height: 12,
-            mines: 12
+            width: 5,
+            height: 5,
+            mines: 1
         }
     }
 }

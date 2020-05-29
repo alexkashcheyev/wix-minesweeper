@@ -53,13 +53,6 @@ function Navbar({ dispatch }) {
                 <Typography variant="h6" className={classes.title}>
                     Minesweeper
                 </Typography>
-                <Typography variant="h6" className={classes.timer}>
-                    00:00
-                </Typography>
-                <FlagRoundedIcon className={classes.flagIcon} />
-                <Typography variant="h6" className={classes.flagCounter}>
-                    x 85000
-                </Typography>
             </Toolbar>
 
         </AppBar>

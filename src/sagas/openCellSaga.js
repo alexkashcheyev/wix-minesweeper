@@ -15,9 +15,36 @@ function* workerSaga(action) {
     }
  
     const newField = openCellsFrom(x, y, currentGame.field);
-
+    
+    
     // if all closed (flagged or not) cells have mines
     // autoflag them and count as win
+    // Or, if amount of closed cells equals number of planted mines
+    
+    const closedRemaining = newField.reduce(
+        (fieldSum, column) => {
+            const fieldSumAddition = column.reduce(
+                (colSum, cell) => {
+                    const addition = (cell.isOpened ? 0 : 1);
+                    console.log('columnSum', colSum, addition);
+                    return colSum + addition;
+                },
+                0
+            )
+            console.log('fieldSum',fieldSum, fieldSumAddition);
+            return fieldSum + fieldSumAddition;
+        },
+        0
+    )
+
+    console.log('closed remaining',closedRemaining);
+
+    if (
+        closedRemaining === currentGame.gameInfo.mines
+    ) {
+        yield put(actions.toggleMessage(true, 'success', 'You won!', 'You opened all the safe cells, that counts as win!'))
+        yield put(actions.changeGameStage(gameStage.WON));
+    }
 
     yield put(actions.updateField(newField));
 }
