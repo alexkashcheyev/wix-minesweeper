@@ -121,7 +121,9 @@ export function openCellsFrom(x, y, field) {
     while (queue.length > 0) {
         const c = queue.shift();
 
-        if (!newField[c.x][c.y].isOpened) {
+        // don't open flagged cells, the user said there is a mine there!
+
+        if (!newField[c.x][c.y].isOpened && !newField[c.x][c.y].isFlagged) {
 
             newField[c.x][c.y].isOpened = true;
             if (

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import Cell from './Cell'
 import * as actions from '../redux/actions';
+import { gameStage } from '../enums';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,18 +17,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function GameField({ field, dispatch, superman, gameInfo, viewport }) {
+function GameField({ field, dispatch, superman, gameInfo, viewport, stage }) {
     const classes = useStyles();
 
     const cellSize = '80px';
 
     function toggleFlag(x, y) {
-        console.log('toggle flag',x,y);
-        dispatch(actions.toggleFlag(x, y, !field[x][y].isFlagged));
+        dispatch(actions.toggleFlag(x, y));
     }
 
     function open(x, y) {
-        dispatch(actions.openCells(x, y, field));
+        dispatch(actions.openCell(x, y));
     }
 
     const columns = field
@@ -63,8 +63,10 @@ function GameField({ field, dispatch, superman, gameInfo, viewport }) {
                             className={classes.cell}
                             key={key}
                             cell={cell}
-                            superman={superman}
+                            superman={ superman }
                             size={cellSize}
+                            revealMines={ stage === gameStage.LOST }
+                            disabled={ stage === gameStage.LOST || stage === gameStage.WON }
                             onFlag={() => toggleFlag(realX, realY) }
                             onOpen={() => open(realX, realY)}
                         />

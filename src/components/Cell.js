@@ -3,6 +3,7 @@ import { makeStyles, Icon, SvgIcon, Paper, Button } from '@material-ui/core';
 import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
 import Mine from '../assets/mine.svg';
 import config from '../appconfig';
+import { gameStage } from '../enums';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: props => props.size * config.fontSizeToCellRatio,
     },
     mineDetected: {
-        background: theme.palette.secondary.light
+        background: theme.palette.primary.light,
     },
     opened: {
 
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Cell({ cell, superman, size, onOpen, onFlag }) {
+function Cell({ disabled, revealMines, cell, superman, size, onOpen, onFlag }) {
     const classes = useStyles({ size });
 
     const resClasses = [
@@ -38,11 +39,11 @@ function Cell({ cell, superman, size, onOpen, onFlag }) {
         cell.isOpened ? classes.opened : classes.closed
     ];
 
-    if (superman && cell.hasMine) resClasses.push(classes.mineDetected);
+    if (superman && cell.hasMine && !revealMines) resClasses.push(classes.mineDetected);
 
     let content;
 
-    if (cell.isOpened && cell.hasMine) {
+    if (cell.hasMine && (cell.isOpened || revealMines) ) {
         content = (
             <Icon className={classes.icon}>
                 <img src={Mine} height={size} width={size} />
@@ -80,6 +81,7 @@ function Cell({ cell, superman, size, onOpen, onFlag }) {
         </Paper>
     ) : (
             <Button
+                disabled={disabled}
                 className={resClasses.join(' ')}
                 variant='contained'
                 onClick={handleClick}

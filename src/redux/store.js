@@ -1,8 +1,15 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { gameStage, actionType } from '../enums';
 import { validViewport, validViewportChange } from '../shared/viewport';
 import { clone } from 'lodash';
+import createSagaMiddleware from 'redux-saga';
+import toggleFlagSaga from '../sagas/toggleFlagSaga';
+import generateFieldSaga from '../sagas/generateFieldSaga';
+import changeOffsetSaga from '../sagas/changeOffsetSaga';
+import openCellSaga from '../sagas/openCellSaga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { fork, all } from 'redux-saga/effects';
 
 const intialState = {
     ui: {
@@ -93,122 +100,6 @@ const rootReducer = (state = intialState, action) => {
                 },
             }
 
-        case actionType.TOGGLE_FLAG:
-            const { x, y } = action.payload;
-            const { field, flagsSet, gameInfo } = state.currentGame;
-            
-            // Can't flag an opened cell
-            if (field[x][y].isOpened) return state;
-            
-            // Taking the flag off
-            if (field[x][y].isFlagged) {
-                const newField = clone(field);
-                newField[x][y].isFlagged = false;
-
-                return {
-                    ...state,
-                    currentGame: {
-                        ...state.currentGame,
-                        flagsSet: flagsSet - 1,
-                        field: newField
-                    }
-                }
-            }
-
-            // Show message if no flags left
-            if (flagsSet === gameInfo.mines) {
-                return {
-                    ...state,
-                    ui: {
-                        ...state.ui,
-                        message: {
-                            visible: true,
-                            severity: 'warning',
-                            title: 'No flags left',
-                            content: 'You had just enough flags to flag all the mines.'
-                        }
-                    }
-                }
-            }
-
-            // At this point we will need to update the field
-
-            const newField = clone(field);
-            newField[x][y].isFlagged = true;
-            let newMessage = { visible: false }
-
-            // are all the mines flagged?
-
-            if (
-                // all the flags are set
-                flagsSet + 1 === gameInfo.mines
-
-                // and no flagged cells without mines exist
-                && !newField.find(
-                    (column, x) => column.find(
-                        (cell, y) => cell.isFlagged && !cell.hasMine
-                    )
-                )
-            ) {
-                newMessage = {
-                    visible: true,
-                    title: 'Congratulations!',
-                    content: 'You win!',
-                    severity: 'success'
-                }
-            }
-
-            return {
-                ...state,
-                currentGame: {
-                    ...state.currentGame,
-                    field: newField,
-                    flagsSet: flagsSet + 1
-                },
-                ui : {
-                    ...state.ui,
-                    message: {
-                        ...state.ui.message,
-                        ...newMessage
-                    }
-                }
-            }
-
-        case actionType.OPEN_CELLS:
-            return {
-                ...state,
-                currentGame: {
-                    ...state.currentGame,
-                    field: action.payload.field
-                }
-            }
-
-        case actionType.CHANGE_OFFSET: {
-            
-            if (
-                validViewportChange(state.currentGame.viewport, state.currentGame.gameInfo, action.payload.dx, action.payload.dy)
-            ) {
-                const newX = state.currentGame.viewport.offset.x + action.payload.dx;
-                const newY = state.currentGame.viewport.offset.y + action.payload.dy;
-
-                return {
-                    ...state,
-                    currentGame: {
-                        ...state.currentGame,
-                        viewport: {
-                            ...state.currentGame.viewport,
-                            offset: {
-                                x: newX,
-                                y: newY
-                            }
-                        }
-                    }
-                }
-            } else {
-                return state;
-            }
-        }
-
         case actionType.TOGGLE_MESSAGE: {
 
             return {
@@ -220,9 +111,70 @@ const rootReducer = (state = intialState, action) => {
             }
             
         }
+
+        case actionType.UPDATE_FIELD: {
+
+            return {
+                ...state,
+                currentGame: {
+                    ...state.currentGame,
+                    field: action.payload.field
+                }
+            }
+        }
+
+        case actionType.UPDATE_FLAG_COUNT: {
+            
+            return {
+                ...state,
+                currentGame: {
+                    ...state.currentGame,
+                    flagsSet: state.currentGame.flagsSet + action.payload.delta
+                }
+            }
+        }
+
+        case actionType.UPDATE_OFFSET: {
+
+            return {
+                ...state,
+                currentGame: {
+                    ...state.currentGame,
+                    viewport: {
+                        ...state.currentGame.viewport,
+                        offset: action.payload.offset                        
+                    }
+                }
+            }
+        }
+
+        case actionType.CHANGE_GAME_STAGE: {
+            return {
+                ...state,
+                currentGame: {
+                    ...state.currentGame,
+                    stage: action.payload.stage
+                }
+            }
+        }
     }
 
     return state;
 }
 
-export const store = createStore(rootReducer)
+const sagaMiddleware = createSagaMiddleware();
+export const store = createStore(
+    rootReducer, 
+    applyMiddleware(sagaMiddleware)
+);
+
+function* rootSaga () {
+    yield all([
+        fork(toggleFlagSaga),
+        fork(generateFieldSaga),
+        fork(changeOffsetSaga),
+        fork(openCellSaga)
+    ]);
+}
+
+sagaMiddleware.run(rootSaga);

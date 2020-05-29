@@ -19,28 +19,25 @@ export const changeNewGameParameter = (key, value) => ({
 });
 
 export const startGame = (gameInfo) => {
-    const field = generateField(gameInfo);
 
     return {
         type: actionType.START_GAME,
         payload: {
-            gameInfo,
-            field
+            gameInfo
         }
     }
 }
 
-export const toggleFlag = (x, y, value) => ({
+export const toggleFlag = (x, y) => ({
     type: actionType.TOGGLE_FLAG,
-    payload: { x, y, value }
+    payload: { x, y }
 });
 
-export const openCells = (x, y, field) => {
-    const newField = openCellsFrom(x, y, field);
+export const openCell = (x, y) => {
 
     return {
         type: actionType.OPEN_CELLS,
-        payload: { field: newField }
+        payload: { x, y }
     }
 }
 
@@ -52,4 +49,24 @@ export const changeOffset = (dx, dy) => ({
 export const toggleMessage = (visible, severity='info', title='', content='') => ({
     type: actionType.TOGGLE_MESSAGE,
     payload: { severity, visible, title, content }
+})
+
+export const updateField = (field) => ({
+    type: actionType.UPDATE_FIELD,
+    payload: { field }
+})
+
+export const updateSetFlags = (delta) => ({
+    type: actionType.UPDATE_FLAG_COUNT,
+    payload: { delta }
+})
+
+export const updateOffset = (offset) => ({
+    type: actionType.UPDATE_OFFSET,
+    payload: { offset }
+})
+
+export const changeGameStage = (stage) => ({
+    type: actionType.CHANGE_GAME_STAGE,
+    payload: { stage }
 })
