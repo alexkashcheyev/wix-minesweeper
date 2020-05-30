@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core';
 import { TextField, Button } from '@material-ui/core';
+
 import * as actions from '../redux/actions';
 import config from '../appconfig';
 
@@ -21,15 +22,19 @@ function NewGame({ width, height, mines, dispatch }) {
     const classes = useStyles();
     
     const { minWidth, maxWidth, minHeight, maxHeight, minMines, minFreeCells } = config;
+    
     const maxMines = width * height - minFreeCells;
     
-    const widthError = () => width < minWidth || width > maxWidth;
-    const heightError = () => height < minHeight || height > maxHeight;
-    const mineError = () => mines < minMines || mines > maxMines;
-    const anyError = () => widthError() || heightError() || mineError();
+    // functions used to validate the new games parameters
+    
+    const validWidth    = () => width   >= minWidth   && width   <= maxWidth  ;
+    const validHeight   = () => height  >= minHeight  && height  <= maxHeight ;
+    const validMines    = () => mines   >=  minMines  && mines   <= maxMines  ;
+    
+    const anyError = () => !validWidth() || !validHeight() || !validMines();
 
     const changeParameter = (e) => {
-        dispatch(actions.changeNewGameParameter(e.target.id, parseInt(e.target.value)))
+        dispatch(actions.setNewGameParameter(e.target.id, parseInt(e.target.value)))
     }
 
     const startGame = (e) => {
@@ -52,7 +57,7 @@ function NewGame({ width, height, mines, dispatch }) {
                     value={width} 
                     fullWidth={true}
                     inputProps={ {min: minWidth, max: maxWidth} }
-                    error={ widthError() }
+                    error={ !validWidth() }
                     onChange={changeParameter}
                 />
 
@@ -67,7 +72,7 @@ function NewGame({ width, height, mines, dispatch }) {
                     value={height}
                     fullWidth={true}
                     inputProps={ {min: minHeight, max: maxHeight} }
-                    error={ heightError() }
+                    error={ !validHeight() }
                     onChange={changeParameter}
                 />
 
@@ -82,7 +87,7 @@ function NewGame({ width, height, mines, dispatch }) {
                     value={mines}
                     fullWidth={true}
                     inputProps={ {min: minMines, max: maxMines} }
-                    error={ mineError() }
+                    error={ !validMines() }
                     onChange={changeParameter}
                 />
 

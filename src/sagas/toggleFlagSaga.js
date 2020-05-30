@@ -11,21 +11,22 @@ function* workerSaga(action) {
     // Can't flag an opened cell
     if (field[x][y].isOpened) return;
 
+    const newField = clone(field);
+
     // Taking the flag off
     if (field[x][y].isFlagged) {
 
-        const newField = clone(field);
         newField[x][y].isFlagged = false;
 
-        yield put(actions.updateField(newField));
-        yield put(actions.updateSetFlags(-1));
+        yield put(actions.setField(newField));
+        yield put(actions.changeSetFlags(-1));
 
         return;        
     }
 
-    // Show message if no flags left
+    // Show message and do nothing if no flags left
     if (flagsSet === gameInfo.mines) {
-        yield put(actions.toggleMessage(
+        yield put(actions.setMessage(
             true, 
             'warning',
             'No flags left',
@@ -38,14 +39,13 @@ function* workerSaga(action) {
     // At this point we filtered out the cases where we wouldn't 
     // actualy put a flag
 
-    const newField = clone(field);
     newField[x][y].isFlagged = true;
     
-    yield put(actions.updateField(newField));
+    yield put(actions.setField(newField));
 
     // and don't forget to increase set flags amount
 
-    yield put(actions.updateSetFlags(1));
+    yield put(actions.changeSetFlags(1));
 
     // are all the mines flagged?
     if (
@@ -59,13 +59,13 @@ function* workerSaga(action) {
             )
         )
     ) {
-        yield put(actions.toggleMessage(
+        yield put(actions.setMessage(
             true,
             'success',
             'You win!',
             'Congratulations!'
         ));
-        yield put(actions.changeGameStage(gameStage.WON));
+        yield put(actions.setGameStage(gameStage.WON));
     }
 }
 

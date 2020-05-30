@@ -43,9 +43,9 @@ const intialState = {
     },
     newGame: {
         gameInfo: {
-            width: 10,
-            height: 10,
-            mines: 10
+            width: 300,
+            height: 300,
+            mines: 1
         }
     }
 }
@@ -58,7 +58,7 @@ const rootReducer = (state = intialState, action) => {
                 ...state,
                 ui: {
                     ...state.ui,
-                    showMenu: action.payload
+                    showMenu: action.payload.show
                 }
             }
 
@@ -67,11 +67,11 @@ const rootReducer = (state = intialState, action) => {
                 ...state,
                 currentGame: {
                     ...state.currentGame,
-                    superman: action.payload
+                    superman: action.payload.superman
                 }
             }
 
-        case actionType.CHANGE_NEW_GAME_PARAMETER:
+        case actionType.SET_NEW_GAME_PARAMETER:
             return {
                 ...state,
                 newGame: {
@@ -101,7 +101,7 @@ const rootReducer = (state = intialState, action) => {
                 },
             }
 
-        case actionType.TOGGLE_MESSAGE: {
+        case actionType.SET_MESSAGE: {
 
             return {
                 ...state,
@@ -113,7 +113,7 @@ const rootReducer = (state = intialState, action) => {
             
         }
 
-        case actionType.UPDATE_FIELD: {
+        case actionType.SET_FIELD: {
 
             return {
                 ...state,
@@ -135,7 +135,7 @@ const rootReducer = (state = intialState, action) => {
             }
         }
 
-        case actionType.UPDATE_OFFSET: {
+        case actionType.SET_VIEWPORT_OFFSET: {
 
             return {
                 ...state,
@@ -149,7 +149,7 @@ const rootReducer = (state = intialState, action) => {
             }
         }
 
-        case actionType.CHANGE_GAME_STAGE: {
+        case actionType.SET_GAME_STAGE: {
             return {
                 ...state,
                 currentGame: {
@@ -164,6 +164,7 @@ const rootReducer = (state = intialState, action) => {
 }
 
 const sagaMiddleware = createSagaMiddleware();
+
 export const store = createStore(
     rootReducer, 
     applyMiddleware(sagaMiddleware)

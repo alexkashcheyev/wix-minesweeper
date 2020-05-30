@@ -1,72 +1,75 @@
 import { actionType } from '../enums';
-import { generateField, openCellsFrom } from '../shared/field';
 
+// request to show or hide the menu
 export const toggleMenu = (show) => ({
     type: actionType.TOGGLE_MENU,
-    payload: show
+    payload: { show }
 });
 
-export const toggleSuperman = (value) => ({
+// set superman mode to given value
+export const toggleSuperman = (superman) => ({
     type: actionType.TOGGLE_SUPERMAN,
-    payload: value
+    payload: { superman }
 });
 
-export const changeNewGameParameter = (key, value) => ({
-    type: actionType.CHANGE_NEW_GAME_PARAMETER,
-    payload: {
-        key, value
-    }
+// set new game parameter, which is 'width', 'height' or 'mines'
+// to given value, if valid
+export const setNewGameParameter = (key, value) => ({
+    type: actionType.SET_NEW_GAME_PARAMETER,
+    payload: { key, value }
 });
 
-export const startGame = (gameInfo) => {
+// request starting game
+export const startGame = (gameInfo) => ({
+    type: actionType.START_GAME,
+    payload: { gameInfo }
+})
 
-    return {
-        type: actionType.START_GAME,
-        payload: {
-            gameInfo
-        }
-    }
-}
-
+// set or unset flag on given cell
 export const toggleFlag = (x, y) => ({
     type: actionType.TOGGLE_FLAG,
     payload: { x, y }
 });
 
-export const openCell = (x, y) => {
+// request opening a cell
+export const openCell = (x, y) => ({
+    type: actionType.OPEN_CELL,
+    payload: { x, y }
+})
 
-    return {
-        type: actionType.OPEN_CELLS,
-        payload: { x, y }
-    }
-}
-
-export const changeOffset = (dx, dy) => ({
-    type: actionType.CHANGE_OFFSET,
+// request to move the viewport to see different part of the field
+export const moveViewport = (dx, dy) => ({
+    type: actionType.MOVE_VIEWPORT,
     payload: { dx, dy }
 })
 
-export const toggleMessage = (visible, severity='info', title='', content='') => ({
-    type: actionType.TOGGLE_MESSAGE,
+// show/hide the alert with given data
+export const setMessage = (visible, severity='info', title='', content='') => ({
+    type: actionType.SET_MESSAGE,
     payload: { severity, visible, title, content }
 })
 
-export const updateField = (field) => ({
-    type: actionType.UPDATE_FIELD,
+// set the game field as a reflection
+// of user's actions
+export const setField = (field) => ({
+    type: actionType.SET_FIELD,
     payload: { field }
 })
 
-export const updateSetFlags = (delta) => ({
+// increase flags count by given number
+export const changeSetFlags = (delta) => ({
     type: actionType.UPDATE_FLAG_COUNT,
     payload: { delta }
 })
 
-export const updateOffset = (offset) => ({
-    type: actionType.UPDATE_OFFSET,
+// actually set the viewport offset
+export const setViewportOffset = (offset) => ({
+    type: actionType.SET_VIEWPORT_OFFSET,
     payload: { offset }
 })
 
-export const changeGameStage = (stage) => ({
-    type: actionType.CHANGE_GAME_STAGE,
+// move game to another stage
+export const setGameStage = (stage) => ({
+    type: actionType.SET_GAME_STAGE,
     payload: { stage }
 })

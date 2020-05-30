@@ -1,6 +1,94 @@
 import config from '../appconfig';
 import { clone } from 'lodash';
 
+
+export function generateField(gameInfo) {
+
+    // data validation
+    if (!validGameInfo(gameInfo)) {
+        return null;
+    }
+
+    // generate mines at random locations
+    const mineCoordinates = getRandomCells(gameInfo, gameInfo.mines);
+
+    // build an array reflecting the field
+    const field = buildField(gameInfo, mineCoordinates);
+
+    return field;
+}
+
+
+export function openCellsFrom(x, y, field) {
+
+    const newField = clone(field);
+
+    // using BFS to open cells surrounding an empty cell
+    const queue = [{ x, y }];
+
+    let maxQueueLen = 0;
+
+    while (queue.length > 0) {
+        //console.log(queue.length, 'cells in queue');
+        maxQueueLen = Math.max(maxQueueLen, queue.length);
+
+        // take first cell from the queue
+        const c = queue.shift();
+
+        // ignore already opened cells and flagged cells
+        if (!newField[c.x][c.y].isOpened && !newField[c.x][c.y].isFlagged) {
+
+            // open the current cell
+            newField[c.x][c.y].isOpened = true;
+
+            // add its neighbours to the queue if there are
+            // no mines around
+            if (
+                newField[c.x][c.y].minesAround === 0
+            ) {
+                const neighbors = getNeighborsCoordinates(
+                    c.x, c.y,
+                    newField.length,
+                    newField[c.x].length
+                ).filter(
+                    // This filter duplicates the if, and removing it will not 
+                    // change the functionality, but it reduces the maximum reached 
+                    // queue length from 4773 to 2388 for a 300x300 field with 1 mine.
+                    // The "if" is still needed, because the cells still waiting in the 
+                    // queue, can be already opened.
+                    n => !newField[n.x][n.y].isOpened
+                        && !newField[c.x][c.y].isFlagged
+                );
+
+                queue.push(...neighbors);
+            }
+        }
+
+    }
+
+    console.log('max queue length was', maxQueueLen)
+
+    return newField;
+}
+
+export function countClosedCells(field) {
+
+    return field.reduce(
+        (fieldSum, column) => {
+            const fieldSumAddition = column.reduce(
+                (colSum, cell) => {
+                    const addition = (cell.isOpened ? 0 : 1);
+                    return colSum + addition;
+                },
+                0
+            )
+            return fieldSum + fieldSumAddition;
+        },
+        0
+    )
+
+}
+
 function validGameInfo({ width, height, mines }) {
 
     const hasErrors = (width < config.minWidth)
@@ -11,28 +99,22 @@ function validGameInfo({ width, height, mines }) {
         || (mines > (width * height - config.minFreeCells));
 
     return !hasErrors;
+
 }
 
 function getRandomCells({ height, width}, amount) {
-    
+   
     const res = [];
     const allCells = [];
     
+    // generate an aray of all possible coordinates of given field
     for (let x = 0; x < width; x++) {
-
         for (let y = 0; y < height; y++) {
-
-            // the biggest this array is going 
-            // to be is 90000 elements
-            // assuming every number is 8 bytes,
-            // it will take about 700 kbytes of memory
-            // but can be disposed by GC as soon as 
-            // this function is finished.
             allCells.push({x,y});
-
         }
     }
 
+    // get requested amount of coordinates by random index
     for (let i = 0; i < amount; i++) {
         const index = Math.floor(Math.random() * allCells.length);
 
@@ -63,6 +145,7 @@ function getNeighborsCoordinates(x, y, width, height) {
 function buildField({ width, height }, mineCoordinates) {
     const field = [];
 
+    // create a 2d array filled with empty cells
     for (let x = 0; x < width; x++) {
         field[x] = [];
         for (let y = 0; y < height; y++) {
@@ -75,14 +158,16 @@ function buildField({ width, height }, mineCoordinates) {
         }
     }
 
+    // plant the mines
     for (let m of mineCoordinates) {
         field[m.x][m.y].hasMine = true;
     }
 
+    // calculate the numbers of mines around each cell
     for (let x = 0; x < width; x++) {
-
         for (let y = 0; y < height; y++) {
-
+            
+            // if the cell has mine inside, don't calculate
             if (!field[x][y].hasMine) {
 
                 const minesAround = getNeighborsCoordinates(x, y, width, height)
@@ -90,63 +175,9 @@ function buildField({ width, height }, mineCoordinates) {
                     .length;
 
                 field[x][y].minesAround = minesAround;
-
             }
-
         }
     }
 
     return field;
-}
-
-export function generateField(gameInfo) {
-
-    // data validation
-    if (!validGameInfo(gameInfo)) {
-        return null;
-    }
-    // generate mines at random locations
-    const mineCoordinates = getRandomCells(gameInfo, gameInfo.mines);
-
-    // build an array reflecting the field
-    // (It could take by about 2 Mb of RAM)
-    const field = buildField(gameInfo, mineCoordinates);
-
-    return field;
-}
-
-
-export function openCellsFrom(x, y, field) {
-    const newField = clone(field);
-
-    const queue = [{ x, y }];
-
-    let i = 0;
-
-    while (queue.length > 0) {
-        const c = queue.shift();
-
-        // don't open flagged cells, the user said there is a mine there!
-
-        if (!newField[c.x][c.y].isOpened && !newField[c.x][c.y].isFlagged) {
-
-            newField[c.x][c.y].isOpened = true;
-            if (
-                newField[c.x][c.y].minesAround === 0
-            ) {
-                const neighbors = getNeighborsCoordinates(
-                    c.x, c.y,
-                    newField.length,
-                    newField[c.x].length
-                ).filter(
-                    n => !newField[n.x][n.y].isOpened
-                );
-
-                queue.push(...neighbors);
-            }
-        }
-
-    }
-
-    return newField;
 }

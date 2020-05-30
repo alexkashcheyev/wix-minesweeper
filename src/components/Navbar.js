@@ -1,9 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
-import { connect } from 'react-redux';
+
 import * as actions from '../redux/actions'
 
 const useStyles = makeStyles((theme) => ({

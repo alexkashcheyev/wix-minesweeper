@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
+
 import Cell from './Cell'
-import * as actions from '../redux/actions';
 import { gameStage } from '../enums';
+import * as actions from '../redux/actions';
 import config from '../appconfig';
 
 const useStyles = makeStyles((theme) => ({
@@ -74,7 +75,7 @@ function buildColumns({ field, gameInfo, viewport, classes, superman, stage, han
                     // a unique key for reactjs
                     const key = fieldX + '_' + fieldY;
                     
-                    return buildCell({ x: fieldX, y: fieldY, cell, classes, superman, stage, handleFlag, handleOpen })
+                    return buildCell({ x: fieldX, y: fieldY, key, cell, classes, superman, stage, handleFlag, handleOpen })
                 });
 
             return (

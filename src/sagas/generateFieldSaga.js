@@ -9,7 +9,7 @@ function* workerSaga() {
 
     const field = generateField(gameInfo);
 
-    yield put(actions.updateField(field))
+    yield put(actions.setField(field))
     
     return;
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core'
 import { connect } from 'react-redux';
 import { Alert, AlertTitle } from '@material-ui/lab'
+
 import config from '../appconfig';
 import * as actions from '../redux/actions';
 
@@ -18,16 +19,19 @@ const useStyles = makeStyles((theme) => ({
 function Message ({ severity, visible, title, content, dispatch }) {
     const classes = useStyles();
 
+    useEffect(() => {
+        setTimeout(
+            () => {
+                if (visible) dispatch(actions.setMessage(false))
+            },
+            config.messageTimeout
+        );
+    })
+
     if (!visible) return ' ';
 
     // autohide the message after some time
     
-    useEffect(() => {
-        setTimeout(
-            () => dispatch(actions.toggleMessage(false)),
-            config.messageTimeout
-        );
-    })
 
     return (
         <Alert

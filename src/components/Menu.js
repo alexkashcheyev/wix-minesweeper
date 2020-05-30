@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { Drawer, makeStyles, List, ListItem, IconButton, ListItemSecondaryAction, ListItemText, Button, Icon } from '@material-ui/core';
+import React from 'react';
+import { Drawer, makeStyles, List, ListItem, IconButton, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
+
 import NewGame from './NewGame';
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions';

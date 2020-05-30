@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, Icon, Paper, Button } from '@material-ui/core';
 import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
+
 import Mine from '../assets/mine.svg';
 import config from '../appconfig';
 

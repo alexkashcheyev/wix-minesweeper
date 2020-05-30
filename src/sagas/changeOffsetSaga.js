@@ -5,6 +5,8 @@ import { selectCurrentGame } from '../redux/selectors';
 import { validViewportChange } from '../shared/viewport';
 
 function* workerSaga(action) {
+    // move over the field if it's bigger than the viewport
+
     const currentGame = yield select(selectCurrentGame);
 
     if (
@@ -18,13 +20,13 @@ function* workerSaga(action) {
         const newX = currentGame.viewport.offset.x + action.payload.dx;
         const newY = currentGame.viewport.offset.y + action.payload.dy;
 
-        yield put(actions.updateOffset({x: newX, y: newY}));
+        yield put(actions.setViewportOffset({x: newX, y: newY}));
     }
 }
 
 // watcher saga
 function* changeOffsetSaga() {
-    yield takeEvery(actionType.CHANGE_OFFSET, workerSaga);
+    yield takeEvery(actionType.MOVE_VIEWPORT, workerSaga);
 }
 
 export default changeOffsetSaga;

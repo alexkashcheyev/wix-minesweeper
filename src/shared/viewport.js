@@ -21,7 +21,7 @@ export function validViewportChange(viewport, gameInfo, dx, dy) {
         } 
     }
 
-    // if vertical change requested
+    // if vertical change requested, do the same
     if (dy !== 0) {
 
         if (viewport.height >= gameInfo.height) return false;
