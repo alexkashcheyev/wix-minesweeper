@@ -8,7 +8,6 @@ function* workerSaga() {
     const gameInfo = yield select(selectCurrentGameInfo);
 
     const field = generateField(gameInfo);
-    console.log('generated field', field);
 
     yield put(actions.updateField(field))
     

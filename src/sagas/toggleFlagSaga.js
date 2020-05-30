@@ -23,7 +23,6 @@ function* workerSaga(action) {
         return;        
     }
 
-    console.log('flagsSet', flagsSet)
     // Show message if no flags left
     if (flagsSet === gameInfo.mines) {
         yield put(actions.toggleMessage(

@@ -66,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
-    console.log(viewport, gameInfo);
     
     const classes = useStyles();
     

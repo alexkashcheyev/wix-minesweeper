@@ -96,8 +96,6 @@ function buildField({ width, height }, mineCoordinates) {
         }
     }
 
-    console.log('ready');
-
     return field;
 }
 

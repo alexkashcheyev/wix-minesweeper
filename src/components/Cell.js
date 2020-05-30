@@ -7,15 +7,17 @@ import { gameStage } from '../enums';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        boxSizing: 'border-box',
         height: props => props.size,
         width: props => props.size,
+
+        boxSizing: 'border-box',
         margin: theme.spacing(1),
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         minWidth: '0',
         fontSize: config.cellFontSize,
+        padding: '0'
     },
     mineDetected: {
         background: theme.palette.primary.light,
@@ -27,8 +29,11 @@ const useStyles = makeStyles((theme) => ({
         border: '1px solid transparent'
     },
     icon: {
-        height: props => props.size,
-        width: props => props.size
+        height: config.cellSize,
+        width: config.cellSize,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     //classes for numbers
@@ -70,12 +75,12 @@ function Cell({ disabled, revealMines, cell, superman, size, onOpen, onFlag }) {
 
     if (superman && cell.hasMine && !revealMines) resClasses.push(classes.mineDetected);
 
-    let content;
+    let content = ' ';
 
     if (cell.hasMine && (cell.isOpened || revealMines) ) {
         content = (
             <Icon className={classes.icon}>
-                <img src={Mine} height={size} width={size} />
+                <img src={Mine} height='100%' width='100%' />
             </Icon>
         )
     }
@@ -84,7 +89,7 @@ function Cell({ disabled, revealMines, cell, superman, size, onOpen, onFlag }) {
         resClasses.push(classes[cell.minesAround]);
         
         content = (
-            <div class>{cell.minesAround}</div>
+            <div>{cell.minesAround}</div>
         )
     }
 
@@ -117,7 +122,6 @@ function Cell({ disabled, revealMines, cell, superman, size, onOpen, onFlag }) {
                 variant='contained'
                 onClick={handleClick}
             >
-                &nbsp;
                 { content}
             </Button>
         )

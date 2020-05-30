@@ -35,8 +35,6 @@ function* workerSaga(action) {
         0
     )
 
-    console.log('closed remaining',closedRemaining);
-
     if (
         closedRemaining === currentGame.gameInfo.mines
     ) {

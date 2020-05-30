@@ -20,7 +20,7 @@ const appConfig = {
     panelWidth: '15rem',
     drawerWidth: '20rem',
     cellSize: '2.1rem',
-    cellFontSize: '1rem',
+    cellFontSize: '1.1rem',
 
     edgeBorder: '1px solid black',
     nonEdgeBorder: '1px solid transparent'
