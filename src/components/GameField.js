@@ -54,10 +54,9 @@ function buildColumns({ field, gameInfo, viewport, classes, superman, stage, han
                 )
         ).map((column, x) => {
 
-            const cells = column.
+            const cells = column.filter(
+                    // filter only visible cells
 
-                // filter only visible cells
-                filter(
                     (cell, y) =>
                         gameInfo.height <= viewport.height
                         || (

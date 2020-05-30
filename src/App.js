@@ -3,7 +3,6 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Menu from './components/Menu';
 import { Box, Container } from '@material-ui/core';
-import GameField from './components/GameField';
 import Message from './components/Message';
 import { makeStyles } from '@material-ui/core'
 import Viewport from './components/Viewport';

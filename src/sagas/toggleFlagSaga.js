@@ -1,4 +1,4 @@
-import { takeEvery, take, put, select } from 'redux-saga/effects';
+import { takeEvery, put, select } from 'redux-saga/effects';
 import { gameStage, actionType } from '../enums';
 import * as actions from '../redux/actions';
 import { selectCurrentGame } from '../redux/selectors';

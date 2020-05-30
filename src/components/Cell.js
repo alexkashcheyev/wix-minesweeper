@@ -73,7 +73,7 @@ function calculateContent(cell, classes, revealMines) {
     if (cell.hasMine && (cell.isOpened || revealMines)) {
         return (
             <Icon className={classes.icon}>
-                <img src={Mine} height='100%' width='100%' />
+                <img src={Mine} height='100%' width='100%' alt='mine' />
             </Icon>
         )
     }

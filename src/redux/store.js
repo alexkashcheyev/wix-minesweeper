@@ -1,14 +1,10 @@
-import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { gameStage, actionType } from '../enums';
-import { validViewport, validViewportChange } from '../shared/viewport';
-import { clone } from 'lodash';
 import createSagaMiddleware from 'redux-saga';
 import toggleFlagSaga from '../sagas/toggleFlagSaga';
 import generateFieldSaga from '../sagas/generateFieldSaga';
 import changeOffsetSaga from '../sagas/changeOffsetSaga';
 import openCellSaga from '../sagas/openCellSaga';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { fork, all } from 'redux-saga/effects';
 import config from '../appconfig';
 
@@ -158,9 +154,9 @@ const rootReducer = (state = intialState, action) => {
                 }
             }
         }
-    }
 
-    return state;
+        default: return state;
+    }
 }
 
 const sagaMiddleware = createSagaMiddleware();

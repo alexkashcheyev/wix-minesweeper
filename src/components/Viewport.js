@@ -72,35 +72,37 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
     
     const classes = useStyles();
 
-    const handleKeyPress = (e) => {
-
-        let change = false;
-
-        if (['KeyW', 'ArrowUp'].indexOf(e.code) >= 0) {
-            change = { dx: 0, dy: -1 }
-        } else if (['KeyS', 'ArrowDown'].indexOf(e.code) >= 0) {
-            change = { dx: 0, dy: 1 }
-        } else if (['KeyA', 'ArrowLeft'].indexOf(e.code) >= 0) {
-            change = { dx: -1, dy: 0 }
-        } else if (['KeyD', 'ArrowRight'].indexOf(e.code) >= 0) {
-            change = { dx: 1, dy: 0 }
-        }
-
-        if (change) {
-            dispatch(actions.moveViewport(change.dx, change.dy))
-        }
-    }
-
+    
     const changeOffset = (dx, dy) => {
         dispatch(actions.moveViewport(dx, dy));
     }
 
     useEffect(() => {
+        const handleKeyPress = (e) => {
+
+            let change = false;
+
+            if (['KeyW', 'ArrowUp'].indexOf(e.code) >= 0) {
+                change = { dx: 0, dy: -1 }
+            } else if (['KeyS', 'ArrowDown'].indexOf(e.code) >= 0) {
+                change = { dx: 0, dy: 1 }
+            } else if (['KeyA', 'ArrowLeft'].indexOf(e.code) >= 0) {
+                change = { dx: -1, dy: 0 }
+            } else if (['KeyD', 'ArrowRight'].indexOf(e.code) >= 0) {
+                change = { dx: 1, dy: 0 }
+            }
+
+            if (change) {
+                dispatch(actions.moveViewport(change.dx, change.dy))
+            }
+        }
+
+
         document.addEventListener('keyup', handleKeyPress);
         return () => {
             document.removeEventListener('keyup', handleKeyPress);
         }
-    }, [document]);
+    });
 
     if (stage === gameStage.NOT_STARTED) {
         return (
