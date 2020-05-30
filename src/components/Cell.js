@@ -65,7 +65,37 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function calculateContent(cell, classes, revealMines) {
+
+function Cell({ disabled, revealMines: revealMine, cell, superman, size, showFlagOnMine, onOpen, onFlag }) {
+    const classes = useStyles({ size });
+
+    // all the classes to apply to the cell
+    // regarding on its state
+    const resClasses = [
+        classes.root,
+        cell.isOpened ? classes.opened : classes.closed
+    ];
+
+    // add a background to cell if mine is
+    // detected in superman mode
+    if (superman && cell.hasMine && !revealMine) resClasses.push(classes.mineDetected);
+
+    // add a class depeneding on mines-around
+    // to color the number as in classic minesweeper
+    if (cell.isOpened && !cell.hasMine && cell.minesAround > 0) resClasses.push(classes[cell.minesAround]);
+
+    // cell content may be nothing, a mine image or 
+    // a number of mines around, or flag icon
+    const content = calculateContent(cell, classes, revealMine, showFlagOnMine);
+
+    // if the cell is opened, show a paper element,
+    // otherwise a button
+    return cell.isOpened
+        ? createOpenCell(resClasses, content)
+        : createClosedCell({ resClasses, content, disabled, flagged: cell.isFlagged, onOpen, onFlag })
+}
+
+function calculateContent(cell, classes, revealMines, showFlagOnMine) {
 
     // show mine icon if the cell has one and it is either open 
     // or the game has ended and all mines are revealed
@@ -88,12 +118,18 @@ function calculateContent(cell, classes, revealMines) {
     }
 
     // if a cell is closed and flagged, show flag icon
+    // also if the cell has a mine and the game is won
 
-    if (!cell.isOpened && cell.isFlagged) {
+    if (
+        (!cell.isOpened && cell.isFlagged)
+        ||
+        (cell.hasMine && showFlagOnMine)
+    ) {
         return (
             <FlagRoundedIcon className={classes.icon} color='secondary' />
         )
     }
+
 
     // in all other cases, show nothing
     return ' ';
@@ -135,33 +171,5 @@ function createClosedCell({ resClasses, content, disabled, flagged, onOpen, onFl
     )
 }
 
-function Cell({ disabled, revealMines, cell, superman, size, onOpen, onFlag }) {
-    const classes = useStyles({ size });
-
-    // all the classes to apply to the cell
-    // regarding on its state
-    const resClasses = [
-        classes.root,
-        cell.isOpened ? classes.opened : classes.closed
-    ];
-    
-    // add a background to cell if mine is
-    // detected in superman mode
-    if (superman && cell.hasMine && !revealMines) resClasses.push(classes.mineDetected);
-
-    // add a class depeneding on mines-around
-    // to color the number as in classic minesweeper
-    if (cell.isOpened && !cell.hasMine && cell.minesAround > 0) resClasses.push(classes[cell.minesAround]);
-
-    // cell content may be nothing, a mine image or 
-    // a number of mines around
-    const content = calculateContent(cell, classes, revealMines);
-
-    // if the cell is opened, show a paper element,
-    // otherwise a button
-    return cell.isOpened 
-        ? createOpenCell(resClasses, content)
-        : createClosedCell({ resClasses, content, disabled, flagged: cell.isFlagged, onOpen, onFlag} )
-}
 
 export default Cell;

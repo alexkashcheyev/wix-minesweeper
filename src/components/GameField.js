@@ -33,7 +33,8 @@ function buildCell({x, y, key, cell, classes, superman, stage, handleFlag, handl
             cell={cell}
             superman={superman}
             size={config.cellSize}
-            revealMines={stage === gameStage.LOST}
+            revealMine={ stage === gameStage.LOST }
+            showFlagOnMine={ stage === gameStage.WON }
             disabled={stage === gameStage.LOST || stage === gameStage.WON}
             onFlag={() => handleFlag(x, y)}
             onOpen={() => handleOpen(x, y)}

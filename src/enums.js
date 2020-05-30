@@ -15,7 +15,6 @@ export const actionType = {
 
 export const gameStage = {
     NOT_STARTED: 'NOT_STARTED',
-    LOADING: 'LOADING',
     STARTED: 'STARTED',
     WON: 'WON',
     LOST: 'LOST'
