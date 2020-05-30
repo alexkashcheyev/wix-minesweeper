@@ -15,8 +15,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         minWidth: '0',
-        // this doesn't work, i multiply 20px by a number
-        fontSize: props => props.size * config.fontSizeToCellRatio,
+        fontSize: config.cellFontSize,
     },
     mineDetected: {
         background: theme.palette.primary.light,
@@ -30,7 +29,35 @@ const useStyles = makeStyles((theme) => ({
     icon: {
         height: props => props.size,
         width: props => props.size
+    },
+
+    //classes for numbers
+
+    1: {
+        color: 'blue',
+    },
+    2: {
+        color: 'green',
+    },
+    3: {
+        color: 'red',
+    },
+    4: {
+        color: 'purple',
+    },
+    5: {
+        color: 'maroon'
+    },
+    6: {
+        color: 'turquoise'
+    },
+    7: {
+        color: 'black'
+    },
+    8: {
+        color: 'gray'
     }
+
 }));
 
 function Cell({ disabled, revealMines, cell, superman, size, onOpen, onFlag }) {
@@ -54,8 +81,10 @@ function Cell({ disabled, revealMines, cell, superman, size, onOpen, onFlag }) {
     }
 
     if (cell.isOpened && !cell.hasMine && cell.minesAround > 0) {
+        resClasses.push(classes[cell.minesAround]);
+        
         content = (
-            <div>{cell.minesAround}</div>
+            <div class>{cell.minesAround}</div>
         )
     }
 

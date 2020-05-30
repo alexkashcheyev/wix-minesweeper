@@ -19,7 +19,8 @@ const appConfig = {
     minimapSize: '10rem',
     panelWidth: '15rem',
     drawerWidth: '20rem',
-    cellSize: '2rem'
+    cellSize: '2rem',
+    cellFontSize: '1rem'
 }
 
 export default appConfig;
