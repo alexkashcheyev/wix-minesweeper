@@ -25,7 +25,9 @@ function getRandomCells({ height, width}, amount) {
             // the biggest this array is going 
             // to be is 90000 elements
             // assuming every number is 8 bytes,
-            // it will take 700 kbytes of memory
+            // it will take about 700 kbytes of memory
+            // but can be disposed by GC as soon as 
+            // this function is finished.
             allCells.push({x,y});
 
         }
@@ -33,13 +35,12 @@ function getRandomCells({ height, width}, amount) {
 
     for (let i = 0; i < amount; i++) {
         const index = Math.floor(Math.random() * allCells.length);
-        console.log('random index is ', index);
+
         // removing the element at random index
         // the result of splice is an array
         const cell = allCells.splice(index, 1);
         res.push(...cell)
     }
-    console.log(res);
 
     return res;
 }

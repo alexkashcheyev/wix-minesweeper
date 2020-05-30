@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'row',
+        borderTop: props => props.border.top ? config.edgeBorder : config.nonEdgeBorder,
+        borderBottom: props => props.border.bottom ? config.edgeBorder : config.nonEdgeBorder,
+        borderLeft: props => props.border.left ? config.edgeBorder : config.nonEdgeBorder,
+        borderRight: props => props.border.right ? config.edgeBorder : config.nonEdgeBorder
     },
     column: {
         display: 'flex',
@@ -18,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function GameField({ field, dispatch, superman, gameInfo, viewport, stage }) {
-    const classes = useStyles();
+function GameField({ field, dispatch, superman, gameInfo, viewport, stage, border }) {
+    const classes = useStyles({ border });
 
     function toggleFlag(x, y) {
         dispatch(actions.toggleFlag(x, y));

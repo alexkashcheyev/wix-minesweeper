@@ -175,6 +175,13 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
             )
     }
 
+    const fieldBorder = {
+        top     : !validViewportChange(viewport, gameInfo,  0, -1),
+        bottom  : !validViewportChange(viewport, gameInfo,  0,  1),
+        left    : !validViewportChange(viewport, gameInfo, -1,  0),
+        right   : !validViewportChange(viewport, gameInfo,  1,  0)
+    }
+
     return stage === gameStage.NOT_STARTED ? (
         <Typography variant='h4'>
             To start the game, click on the hamburger menu in the left upper corner, enter the desired parameters and click "Start" button.
@@ -182,7 +189,7 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
     ) : (
         <div className={classes.root}>
             {panel}
-            <GameField className={classes.field} />
+            <GameField className={classes.field} border={fieldBorder} />
         </div>
     )
 }
