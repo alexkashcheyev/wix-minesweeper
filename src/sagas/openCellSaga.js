@@ -26,12 +26,10 @@ function* workerSaga(action) {
             const fieldSumAddition = column.reduce(
                 (colSum, cell) => {
                     const addition = (cell.isOpened ? 0 : 1);
-                    console.log('columnSum', colSum, addition);
                     return colSum + addition;
                 },
                 0
             )
-            console.log('fieldSum',fieldSum, fieldSumAddition);
             return fieldSum + fieldSumAddition;
         },
         0

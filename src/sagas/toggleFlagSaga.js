@@ -1,5 +1,5 @@
 import { takeEvery, take, put, select } from 'redux-saga/effects';
-import { actionType } from '../enums';
+import { gameStage, actionType } from '../enums';
 import * as actions from '../redux/actions';
 import { selectCurrentGame } from '../redux/selectors';
 import { clone } from 'lodash';
@@ -7,8 +7,6 @@ import { clone } from 'lodash';
 function* workerSaga(action) {
     const { x, y } = action.payload;
     const { field, flagsSet, gameInfo } = yield select(selectCurrentGame)
-
-    console.log('toggling flag at',x,y);
 
     // Can't flag an opened cell
     if (field[x][y].isOpened) return;
@@ -25,6 +23,7 @@ function* workerSaga(action) {
         return;        
     }
 
+    console.log('flagsSet', flagsSet)
     // Show message if no flags left
     if (flagsSet === gameInfo.mines) {
         yield put(actions.toggleMessage(
@@ -67,6 +66,7 @@ function* workerSaga(action) {
             'You win!',
             'Congratulations!'
         ));
+        yield put(actions.changeGameStage(gameStage.WON));
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles, Button, Typography, Paper } from '@material-ui/core';
 import GameField from './GameField';
 import Minimap from './Minimap'
@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { gameStage, actionType } from '../enums';
 import * as actions from '../redux/actions';
 import { validViewportChange } from '../shared/viewport';
+import config from '../appconfig';
 
 import KeyboardArrowUpRoundedIcon from '@material-ui/icons/KeyboardArrowUpRounded';
 import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     panel : {
         margin: theme.spacing(1),
         flex: '0',
-        minWidth: '20rem',
+        minWidth: config.minimapSize,
         display: 'flex',
         flexDirection: 'column',
         padding: theme.spacing(1)
@@ -30,10 +31,20 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2)
     },
     minimap: {
+        height: config.minimapSize,
+        width: config.minimapSize,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+    },
+    divider: {
         flex: '1'
     },
     buttons: {
         display: 'grid',
+        gridColumnGap: theme.spacing(1),
+        gridRowGap: theme.spacing(1),
         gridTemplateAreas: ' ". U ." "L D R" '
     },
     btnUp: {
@@ -83,7 +94,7 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
         return () => {
             document.removeEventListener('keyup', handleKeyPress);
         }
-    });
+    }, [document]);
 
     let stats = (
         <div className={classes.stats}>
@@ -110,7 +121,13 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
 
                     {stats}
                     <div className={classes.minimap}>
-                        <Minimap />
+                        <Minimap 
+                            gameInfo={gameInfo} 
+                            viewport={viewport} />
+                        <Typography variant='caption'>Minimap</Typography>
+                    </div>
+                    <div className={classes.divider}>
+                        &nbsp;
                     </div>
                     <div className={classes.buttons}>
                         <Button
@@ -158,7 +175,9 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
     }
 
     return stage === gameStage.NOT_STARTED ? (
-        <h4>Start the game first!</h4>
+        <Typography variant='h4'>
+            To start the game, click on the hamburger menu in the left upper corner, enter the desired parameters and click "Start" button.
+        </Typography>
     ) : (
         <div className={classes.root}>
             {panel}

@@ -7,10 +7,14 @@ const appConfig = {
     minMines: 1,
     minFreeCells: 1,
 
-    autoCloseMenu: true,
+    autoCloseMenuAfterStart: true,
+    autoCloseMenuOnSupermanToggle: false,
 
-    fontSizeToCellRatio: 0.5,
+    fontSizeToCellRatio: 0.75,
     messageTimeout : 5000,
+
+    minimapSize: '20rem',
+    drawerWidth: '20rem'
 }
 
 export default appConfig;

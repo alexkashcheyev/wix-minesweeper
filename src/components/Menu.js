@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     list: {
     },
     listItem: {
-        minWidth: '20rem',
+        minWidth: config.drawerWidth,
     },
     listItemText: {
         padding: theme.spacing(2)
@@ -35,7 +35,7 @@ function Menu({ open, superman, dispatch }) {
     const toggleSuperman = (event) => {
         dispatch(actions.toggleSuperman(!superman));
 
-        if (config.autoCloseMenu) {
+        if (config.autoCloseMenuOnSupermanToggle) {
             dispatch(actions.toggleMenu(false));
         }
     }
