@@ -130,9 +130,13 @@ function getRandomCells({ height, width}, amount) {
 function getNeighborsCoordinates(x, y, width, height) {
 
     return [
+
         { x: -1, y: -1 }, { x: 0, y: -1 }, { x: 1, y: -1 },
-        { x: -1, y: 0 }, { x: 1, y: 0 },
-        { x: -1, y: 1 }, { x: 0, y: 1 }, { x: 1, y: 1 }
+
+        { x: -1, y:  0 }, /*   target   */ { x: 1, y:  0 },
+
+        { x: -1, y:  1 }, { x: 0, y:  1 }, { x: 1, y:  1 }
+
     ].map(
         delta => ({ x: x + delta.x, y: y + delta.y })
     ).filter(
