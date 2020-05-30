@@ -13,25 +13,33 @@ function validGameInfo({ width, height, mines }) {
     return !hasErrors;
 }
 
-function generateRandomMines({ height, width, mines }) {
-    // hangs if height=300, width=300 and mines=8999
-    // maybe generate empty cells if mines > (height * width / 2)
-
+function getRandomCells({ height, width}, amount) {
+    
     const res = [];
+    const allCells = [];
+    
+    for (let x = 0; x < width; x++) {
 
-    while (res.length < mines) {
-        const x = Math.floor(Math.random() * width);
-        const y = Math.floor(Math.random() * height);
+        for (let y = 0; y < height; y++) {
 
-        if (
-            !res.find(
-                el => el.x === x
-                    && el.y === y
-            )
-        ) {
-            res.push({ x, y });
+            // the biggest this array is going 
+            // to be is 90000 elements
+            // assuming every number is 8 bytes,
+            // it will take 700 kbytes of memory
+            allCells.push({x,y});
+
         }
     }
+
+    for (let i = 0; i < amount; i++) {
+        const index = Math.floor(Math.random() * allCells.length);
+        console.log('random index is ', index);
+        // removing the element at random index
+        // the result of splice is an array
+        const cell = allCells.splice(index, 1);
+        res.push(...cell)
+    }
+    console.log(res);
 
     return res;
 }
@@ -70,8 +78,6 @@ function buildField({ width, height }, mineCoordinates) {
         field[m.x][m.y].hasMine = true;
     }
 
-    console.log('calculating numbers');
-
     for (let x = 0; x < width; x++) {
 
         for (let y = 0; y < height; y++) {
@@ -101,7 +107,7 @@ export function generateField(gameInfo) {
         return null;
     }
     // generate mines at random locations
-    const mineCoordinates = generateRandomMines(gameInfo);
+    const mineCoordinates = getRandomCells(gameInfo, gameInfo.mines);
 
     // build an array reflecting the field
     // (It could take by about 2 Mb of RAM)
