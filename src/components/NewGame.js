@@ -40,11 +40,11 @@ function NewGame({ width, height, mines, dispatch }) {
     }
 
     const startGame = (e) => {
-        dispatch(actions.startGame({ width, height, mines }));
-
         if (config.autoCloseMenuAfterStart) {
             dispatch(actions.toggleMenu(false));
         }
+        
+        dispatch(actions.startGame({ width, height, mines }));
     }
     
     return (

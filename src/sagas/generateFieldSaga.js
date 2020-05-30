@@ -1,5 +1,5 @@
 import { takeEvery, put, select } from 'redux-saga/effects';
-import { actionType } from '../enums';
+import { actionType, gameStage } from '../enums';
 import * as actions from '../redux/actions'
 import { selectCurrentGameInfo } from '../redux/selectors';
 import { generateField } from '../shared/field';
@@ -10,6 +10,7 @@ function* workerSaga() {
     const field = generateField(gameInfo);
 
     yield put(actions.setField(field))
+    yield put(actions.setGameStage(gameStage.STARTED))
     
     return;
 }

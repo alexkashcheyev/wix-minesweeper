@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { makeStyles, Button, Typography, Paper } from '@material-ui/core';
+import { makeStyles, Button, Typography, Paper, CircularProgress } from '@material-ui/core';
 
 import KeyboardArrowUpRoundedIcon from '@material-ui/icons/KeyboardArrowUpRounded';
 import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
@@ -79,22 +79,23 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
 
     useEffect(() => {
         const handleKeyPress = (e) => {
-
-            let change = false;
-
-            if (['KeyW', 'ArrowUp'].indexOf(e.code) >= 0) {
-                change = { dx: 0, dy: -1 }
-            } else if (['KeyS', 'ArrowDown'].indexOf(e.code) >= 0) {
-                change = { dx: 0, dy: 1 }
-            } else if (['KeyA', 'ArrowLeft'].indexOf(e.code) >= 0) {
-                change = { dx: -1, dy: 0 }
-            } else if (['KeyD', 'ArrowRight'].indexOf(e.code) >= 0) {
-                change = { dx: 1, dy: 0 }
-            }
-
-            if (change) {
-                dispatch(actions.moveViewport(change.dx, change.dy))
-            }
+            setTimeout(() => {
+                let change = false;
+    
+                if (['KeyW', 'ArrowUp'].indexOf(e.code) >= 0) {
+                    change = { dx: 0, dy: -1 }
+                } else if (['KeyS', 'ArrowDown'].indexOf(e.code) >= 0) {
+                    change = { dx: 0, dy: 1 }
+                } else if (['KeyA', 'ArrowLeft'].indexOf(e.code) >= 0) {
+                    change = { dx: -1, dy: 0 }
+                } else if (['KeyD', 'ArrowRight'].indexOf(e.code) >= 0) {
+                    change = { dx: 1, dy: 0 }
+                }
+    
+                if (change) {
+                    dispatch(actions.moveViewport(change.dx, change.dy))
+                }
+            })
         }
 
 
@@ -110,6 +111,12 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
                 To start the game, click on the hamburger menu in the left upper corner, enter the desired parameters and click "Start" button.
             </Typography>
         ) 
+    }
+
+    if (stage === gameStage.LOADING) {
+        return (
+            <CircularProgress />
+        )
     }
     
     

@@ -86,7 +86,7 @@ const rootReducer = (state = intialState, action) => {
                     ...state.currentGame,
                     ...action.payload,
                     flagsSet: 0,
-                    stage: gameStage.WAITING,
+                    stage: gameStage.LOADING,
                     viewport: {
                         ...state.currentGame.viewport,
                         offset: {
