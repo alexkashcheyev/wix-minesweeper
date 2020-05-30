@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
         gridRowGap: theme.spacing(1),
         gridTemplateAreas: ' ". U ." "L D R" '
     },
+    fieldWrapper: {
+
+    },
     btnUp: {
         gridArea: 'U'
     },
@@ -176,10 +179,10 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
     }
 
     const fieldBorder = {
-        top     : !validViewportChange(viewport, gameInfo,  0, -1),
-        bottom  : !validViewportChange(viewport, gameInfo,  0,  1),
-        left    : !validViewportChange(viewport, gameInfo, -1,  0),
-        right   : !validViewportChange(viewport, gameInfo,  1,  0)
+        top     : viewport.height>= gameInfo.height || !validViewportChange(viewport, gameInfo,  0, -1),
+        bottom  : viewport.height>= gameInfo.height || !validViewportChange(viewport, gameInfo,  0,  1),
+        left    : viewport.width >= gameInfo.height || !validViewportChange(viewport, gameInfo, -1,  0),
+        right   : viewport.width >= gameInfo.height || !validViewportChange(viewport, gameInfo,  1,  0)
     }
 
     return stage === gameStage.NOT_STARTED ? (
@@ -189,7 +192,9 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
     ) : (
         <div className={classes.root}>
             {panel}
-            <GameField className={classes.field} border={fieldBorder} />
+            <div className={classes.fieldWrapper}>
+                <GameField className={classes.field} border={fieldBorder} />
+            </div>
         </div>
     )
 }

@@ -10,10 +10,12 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'row',
-        borderTop: props => props.border.top ? config.edgeBorder : config.nonEdgeBorder,
-        borderBottom: props => props.border.bottom ? config.edgeBorder : config.nonEdgeBorder,
-        borderLeft: props => props.border.left ? config.edgeBorder : config.nonEdgeBorder,
-        borderRight: props => props.border.right ? config.edgeBorder : config.nonEdgeBorder
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderTopColor      : props => props.border.top     ? theme.palette.primary.light : 'transparent',
+        borderBottomColor   : props => props.border.bottom  ? theme.palette.primary.light : 'transparent',
+        borderLeftColor     : props => props.border.left    ? theme.palette.primary.light : 'transparent',
+        borderRightColor    : props => props.border.right   ? theme.palette.primary.light : 'transparent'
     },
     column: {
         display: 'flex',
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GameField({ field, dispatch, superman, gameInfo, viewport, stage, border }) {
+    
     const classes = useStyles({ border });
 
     function toggleFlag(x, y) {
