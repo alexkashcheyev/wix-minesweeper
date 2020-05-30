@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        minWidth: '0',
         // this doesn't work, i multiply 20px by a number
         fontSize: props => props.size * config.fontSizeToCellRatio,
     },

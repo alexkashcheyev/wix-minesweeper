@@ -11,7 +11,7 @@ import Viewport from './components/Viewport';
 const useStyles = makeStyles((theme) => ({
   root: {},
   container: {
-    paddingTop: '10rem',
+    paddingTop: theme.spacing(4),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'

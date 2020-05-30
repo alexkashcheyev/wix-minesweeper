@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import Cell from './Cell'
 import * as actions from '../redux/actions';
 import { gameStage } from '../enums';
+import config from '../appconfig';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 function GameField({ field, dispatch, superman, gameInfo, viewport, stage }) {
     const classes = useStyles();
-
-    const cellSize = '80px';
 
     function toggleFlag(x, y) {
         dispatch(actions.toggleFlag(x, y));
@@ -64,7 +63,7 @@ function GameField({ field, dispatch, superman, gameInfo, viewport, stage }) {
                             key={key}
                             cell={cell}
                             superman={ superman }
-                            size={cellSize}
+                            size={config.cellSize}
                             revealMines={ stage === gameStage.LOST }
                             disabled={ stage === gameStage.LOST || stage === gameStage.WON }
                             onFlag={() => toggleFlag(realX, realY) }
