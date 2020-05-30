@@ -181,8 +181,8 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
     const fieldBorder = {
         top     : viewport.height>= gameInfo.height || !validViewportChange(viewport, gameInfo,  0, -1),
         bottom  : viewport.height>= gameInfo.height || !validViewportChange(viewport, gameInfo,  0,  1),
-        left    : viewport.width >= gameInfo.height || !validViewportChange(viewport, gameInfo, -1,  0),
-        right   : viewport.width >= gameInfo.height || !validViewportChange(viewport, gameInfo,  1,  0)
+        left    : viewport.width >= gameInfo.width || !validViewportChange(viewport, gameInfo, -1,  0),
+        right   : viewport.width >= gameInfo.width || !validViewportChange(viewport, gameInfo,  1,  0)
     }
 
     return stage === gameStage.NOT_STARTED ? (
