@@ -10,6 +10,7 @@ import changeOffsetSaga from '../sagas/changeOffsetSaga';
 import openCellSaga from '../sagas/openCellSaga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { fork, all } from 'redux-saga/effects';
+import config from '../appconfig';
 
 const intialState = {
     ui: {
@@ -28,8 +29,8 @@ const intialState = {
             mines: 10
         },
         viewport: {
-            width: 10,
-            height: 10,
+            width: config.viewportWidth,
+            height: config.viewportHeight,
             offset: {
                 x: 0,
                 y: 0

@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     panel : {
         margin: theme.spacing(1),
         flex: '0',
-        minWidth: config.minimapSize,
+        alignItems: 'center',
+        minWidth: config.panelWidth,
         display: 'flex',
         flexDirection: 'column',
         padding: theme.spacing(1)

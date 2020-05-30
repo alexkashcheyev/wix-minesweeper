@@ -8,7 +8,7 @@ const appConfig = {
     minFreeCells: 1,
 
     viewportWidth: 10,
-    viewportHeight: 6,
+    viewportHeight: 7,
 
     autoCloseMenuAfterStart: true,
     autoCloseMenuOnSupermanToggle: false,
@@ -16,7 +16,8 @@ const appConfig = {
     fontSizeToCellRatio: 0.75,
     messageTimeout : 5000,
 
-    minimapSize: '15rem',
+    minimapSize: '10rem',
+    panelWidth: '15rem',
     drawerWidth: '20rem',
     cellSize: '2rem'
 }
