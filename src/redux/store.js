@@ -43,7 +43,7 @@ const intialState = {
     },
     newGame: {
         gameInfo: {
-            width: 10,
+            width: 3,
             height: 20,
             mines: 1
         }
@@ -78,7 +78,7 @@ const rootReducer = (state = intialState, action) => {
                     ...state.newGame,
                     gameInfo: {
                         ...state.newGame.gameInfo,
-                        [action.payload.key]: [action.payload.value]
+                        [action.payload.key]: action.payload.value
                     }
                 }
             }

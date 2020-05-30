@@ -29,7 +29,7 @@ function NewGame({ width, height, mines, dispatch }) {
     const anyError = () => widthError() || heightError() || mineError();
 
     const changeParameter = (e) => {
-        dispatch(actions.changeNewGameParameter(e.target.id, e.target.value))
+        dispatch(actions.changeNewGameParameter(e.target.id, parseInt(e.target.value)))
     }
 
     const startGame = (e) => {

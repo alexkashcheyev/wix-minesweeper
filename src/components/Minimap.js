@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         border: '1px solid #ccc',
         position: 'relative',
+        overflow: 'hidden',
 
         // root element width will be 100% if the field is horizontal
         // or will be calculated proportionally to the height otherwise.
