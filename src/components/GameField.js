@@ -24,22 +24,26 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function GameField({ field, dispatch, superman, gameInfo, viewport, stage, border }) {
+function buildCell({x, y, key, cell, classes, superman, stage, handleFlag, handleOpen}) {
+    return (
+        <Cell
+            className={classes.cell}
+            key={key}
+            cell={cell}
+            superman={superman}
+            size={config.cellSize}
+            revealMines={stage === gameStage.LOST}
+            disabled={stage === gameStage.LOST || stage === gameStage.WON}
+            onFlag={() => handleFlag(x, y)}
+            onOpen={() => handleOpen(x, y)}
+        />
+    )
+}
+
+function buildColumns({ field, gameInfo, viewport, classes, superman, stage, handleFlag, handleOpen }) {
+    return field
     
-    const classes = useStyles({ border });
-
-    function toggleFlag(x, y) {
-        dispatch(actions.toggleFlag(x, y));
-    }
-
-    function open(x, y) {
-        dispatch(actions.openCell(x, y));
-    }
-
-    const columns = field
-
         // filter only visible columns
-
         .filter(
             (column, x) =>
                 gameInfo.width <= viewport.width
@@ -50,6 +54,8 @@ function GameField({ field, dispatch, superman, gameInfo, viewport, stage, borde
         ).map((column, x) => {
 
             const cells = column.
+
+                // filter only visible cells
                 filter(
                     (cell, y) =>
                         gameInfo.height <= viewport.height
@@ -59,24 +65,16 @@ function GameField({ field, dispatch, superman, gameInfo, viewport, stage, borde
                         )
                 ).map((cell, y) => {
 
-                    const realX = x + viewport.offset.x;
-                    const realY = y + viewport.offset.y;
+                    // x and y here are relative to the viewport,
+                    // not to the actual field
 
-                    const key = realX + '_' + realY;
+                    const fieldX = x + viewport.offset.x;
+                    const fieldY = y + viewport.offset.y;
 
-                    return (
-                        <Cell
-                            className={classes.cell}
-                            key={key}
-                            cell={cell}
-                            superman={ superman }
-                            size={config.cellSize}
-                            revealMines={ stage === gameStage.LOST }
-                            disabled={ stage === gameStage.LOST || stage === gameStage.WON }
-                            onFlag={() => toggleFlag(realX, realY) }
-                            onOpen={() => open(realX, realY)}
-                        />
-                    )
+                    // a unique key for reactjs
+                    const key = fieldX + '_' + fieldY;
+                    
+                    return buildCell({ x: fieldX, y: fieldY, cell, classes, superman, stage, handleFlag, handleOpen })
                 });
 
             return (
@@ -85,6 +83,21 @@ function GameField({ field, dispatch, superman, gameInfo, viewport, stage, borde
                 </div>
             );
         })
+}
+
+function GameField({ field, dispatch, superman, gameInfo, viewport, stage, border }) {
+    
+    const classes = useStyles({ border });
+
+    function handleFlag(x, y) {
+        dispatch(actions.toggleFlag(x, y));
+    }
+
+    function handleOpen(x, y) {
+        dispatch(actions.openCell(x, y));
+    }
+
+    const columns = buildColumns({ field, gameInfo, viewport, classes, superman, stage, handleFlag, handleOpen });
 
     return (
         <div className={classes.root} >
