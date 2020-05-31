@@ -66,7 +66,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Cell({ disabled, revealMines: revealMine, cell, superman, size, showFlagOnMine, onOpen, onFlag }) {
+function Cell({ 
+    disabled, 
+    revealMine, 
+    cell, 
+    superman, 
+    size, 
+    showFlagOnMine, 
+    onOpen, 
+    onFlag 
+}) {
     const classes = useStyles({ size });
 
     // all the classes to apply to the cell
@@ -112,9 +121,7 @@ function calculateContent(cell, classes, revealMines, showFlagOnMine) {
     // show the number
 
     if (cell.isOpened && !cell.hasMine && cell.minesAround > 0) {
-        return (
-            <div>{cell.minesAround}</div>
-        )
+        return cell.minesAround
     }
 
     // if a cell is closed and flagged, show flag icon

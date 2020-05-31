@@ -3,18 +3,6 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import config from '../appconfig';
 
-export function wrapComponent(unwrapped, state) {
-
-    const store = configureStore([])(state);
-
-    const component = (
-        <Provider store={store}>
-            {unwrapped}
-        </Provider>
-    );
-
-    return { store, component };
-}
 
 export function countCells(field, test) {
     return field.reduce(

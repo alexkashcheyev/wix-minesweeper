@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cell component should have button as root element if the cell is closed 1`] = `
+<button
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-root-9 makeStyles-root-28 makeStyles-closed-12"
+  disabled={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  type="button"
+>
+  <span
+    className="MuiButton-label"
+  >
+     
+  </span>
+</button>
+`;
+
+exports[`Cell component should not have button as root element if the cell is open 1`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-29 makeStyles-opened-11 MuiPaper-outlined MuiPaper-rounded"
+>
+   
+</div>
+`;
+
+exports[`Cell component should show flag on flagged closed cell 1`] = `
+<button
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-root-9 makeStyles-root-26 makeStyles-closed-12"
+  disabled={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  type="button"
+>
+  <span
+    className="MuiButton-label"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root makeStyles-icon-13 MuiSvgIcon-colorSecondary"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M14.4 6l-.24-1.2c-.09-.46-.5-.8-.98-.8H6c-.55 0-1 .45-1 1v15c0 .55.45 1 1 1s1-.45 1-1v-6h5.6l.24 1.2c.09.47.5.8.98.8H19c.55 0 1-.45 1-1V7c0-.55-.45-1-1-1h-4.6z"
+      />
+    </svg>
+  </span>
+</button>
+`;
+
+exports[`Cell component should show flag on mined closed cell if it has mine and flags are shown on all mines 1`] = `
+<button
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-root-9 makeStyles-root-27 makeStyles-closed-12"
+  disabled={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  type="button"
+>
+  <span
+    className="MuiButton-label"
+  >
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root makeStyles-icon-13 MuiSvgIcon-colorSecondary"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M14.4 6l-.24-1.2c-.09-.46-.5-.8-.98-.8H6c-.55 0-1 .45-1 1v15c0 .55.45 1 1 1s1-.45 1-1v-6h5.6l.24 1.2c.09.47.5.8.98.8H19c.55 0 1-.45 1-1V7c0-.55-.45-1-1-1h-4.6z"
+      />
+    </svg>
+  </span>
+  <span
+    className="MuiTouchRipple-root"
+  />
+</button>
+`;
+
+exports[`Cell component should show mine icon if there is a mine and the cell is opened 1`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-15 makeStyles-opened-11 MuiPaper-outlined MuiPaper-rounded"
+>
+  <span
+    aria-hidden={true}
+    className="material-icons MuiIcon-root makeStyles-icon-13"
+  >
+    <img
+      alt="mine"
+      height="100%"
+      src={Object {}}
+      width="100%"
+    />
+  </span>
+</div>
+`;
+
+exports[`Cell component should show mine icon if there is a mine and the mines are revealed 1`] = `
+<button
+  className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-root-9 makeStyles-root-16 makeStyles-closed-12"
+  disabled={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onDragLeave={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex={0}
+  type="button"
+>
+  <span
+    className="MuiButton-label"
+  >
+    <span
+      aria-hidden={true}
+      className="material-icons MuiIcon-root makeStyles-icon-13"
+    >
+      <img
+        alt="mine"
+        height="100%"
+        src={Object {}}
+        width="100%"
+      />
+    </span>
+  </span>
+</button>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 1`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-17 makeStyles-opened-11 MuiPaper-outlined MuiPaper-rounded"
+>
+   
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 2`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-18 makeStyles-opened-11 makeStyles-1-1 MuiPaper-outlined MuiPaper-rounded"
+>
+  1
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 3`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-19 makeStyles-opened-11 makeStyles-2-2 MuiPaper-outlined MuiPaper-rounded"
+>
+  2
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 4`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-20 makeStyles-opened-11 makeStyles-3-3 MuiPaper-outlined MuiPaper-rounded"
+>
+  3
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 5`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-21 makeStyles-opened-11 makeStyles-4-4 MuiPaper-outlined MuiPaper-rounded"
+>
+  4
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 6`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-22 makeStyles-opened-11 makeStyles-5-5 MuiPaper-outlined MuiPaper-rounded"
+>
+  5
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 7`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-23 makeStyles-opened-11 makeStyles-6-6 MuiPaper-outlined MuiPaper-rounded"
+>
+  6
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 8`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-24 makeStyles-opened-11 makeStyles-7-7 MuiPaper-outlined MuiPaper-rounded"
+>
+  7
+</div>
+`;
+
+exports[`Cell component should show mine number if there are mines around and the cell is opened 9`] = `
+<div
+  className="MuiPaper-root makeStyles-root-9 makeStyles-root-25 makeStyles-opened-11 makeStyles-8-8 MuiPaper-outlined MuiPaper-rounded"
+>
+  8
+</div>
+`;

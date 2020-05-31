@@ -68,8 +68,8 @@ function buildColumns({ field, gameInfo, viewport, classes, superman, stage, han
                             revealMine={stage === gameStage.LOST}
                             showFlagOnMine={stage === gameStage.WON}
                             disabled={stage === gameStage.LOST || stage === gameStage.WON}
-                            onFlag={() => handleFlag(x, y)}
-                            onOpen={() => handleOpen(x, y)}
+                            onFlag={() => handleFlag(fieldX, fieldY)}
+                            onOpen={() => handleOpen(fieldX, fieldY)}
                         />
                     )
                 });
