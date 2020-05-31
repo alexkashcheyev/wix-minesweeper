@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import config from '../appconfig';
 
 export function wrapComponent(unwrapped, state) {
 
@@ -59,4 +60,29 @@ export function createField(template) {
     }
 
     return res;
+}
+
+export function createViewport(
+    offsetx = 0, 
+    offsety = 0, 
+    width = config.viewportWidth, 
+    height = config.viewportHeight
+) {
+    return {
+        width, height,
+        offset: {
+            x: offsetx,
+            y: offsety
+        }
+    }
+}
+
+export function createGameInfo(
+    width,
+    height,
+    mines = 1
+) {
+    return {
+        width, height, mines
+    }
 }

@@ -1,5 +1,5 @@
-import { generateField, validGameInfo, openCellsFrom, countClosedCells } from "./field";
-import { countCells, createField } from '../shared/testutil';
+import { generateField, openCellsFrom } from './field.helpers';
+import { countCells, createField } from './testutil';
 
 describe('generateField', () => {
 

@@ -1,5 +1,3 @@
-console.log('jest.config.js');
-
 module.exports = {
     transform: {
         '^.+\\.js$': ['babel-jest'],
@@ -16,7 +14,12 @@ module.exports = {
         '<rootDir>',
         '<rootDir>/src',
     ],
+    modulePathIgnorePatterns: [
+        //**/*.test.js/
+    ],
     moduleDirectories: [
         'node_modules'
-    ],
+    ]
 }
+
+console.log('loaded jest.config.js');

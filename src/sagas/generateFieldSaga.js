@@ -2,7 +2,7 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 import { actionType, gameStage } from '../enums';
 import * as actions from '../redux/actions'
 import { selectCurrentGameInfo } from '../redux/selectors';
-import { generateField } from '../shared/field';
+import { generateField } from '../shared/field.helpers';
 
 function* workerSaga() {
     const gameInfo = yield select(selectCurrentGameInfo);

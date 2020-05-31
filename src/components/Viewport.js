@@ -12,7 +12,7 @@ import Minimap from './Minimap'
 import { connect } from 'react-redux';
 import { gameStage } from '../enums';
 import * as actions from '../redux/actions';
-import { validViewportChange } from '../shared/viewport';
+import { validViewportChange } from '../shared/viewport.helpers';
 import config from '../appconfig';
 
 

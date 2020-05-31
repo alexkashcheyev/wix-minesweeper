@@ -2,7 +2,7 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 
 import { actionType, gameStage } from '../enums';
 import * as actions from '../redux/actions'
-import { openCellsFrom, countClosedCells } from '../shared/field';
+import { openCellsFrom, countClosedCells } from '../shared/field.helpers';
 import { selectCurrentGame } from '../redux/selectors';
 
 function* workerSaga(action) {

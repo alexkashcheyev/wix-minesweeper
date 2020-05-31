@@ -2,7 +2,7 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 import { actionType } from '../enums';
 import * as actions from '../redux/actions';
 import { selectCurrentGame } from '../redux/selectors';
-import { validViewportChange } from '../shared/viewport';
+import { validViewportChange } from '../shared/viewport.helpers';
 
 function* workerSaga(action) {
     // move over the field if it's bigger than the viewport
