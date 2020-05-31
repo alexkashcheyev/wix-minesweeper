@@ -8,7 +8,7 @@ import openCellSaga from '../sagas/openCellSaga';
 import { fork, all } from 'redux-saga/effects';
 import config from '../appconfig';
 
-const intialState = {
+export const initialState = {
     ui: {
         showMenu: false,
         message: {
@@ -46,7 +46,7 @@ const intialState = {
     }
 }
 
-const rootReducer = (state = intialState, action) => {
+const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case actionType.TOGGLE_MENU:

@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,6 +39,13 @@
     ]
   },
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.8"
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-jest": "24.9.0",
+    "babel-polyfill": "^6.26.0",
+    "jest": "24.9.0",
+    "react-test-renderer": "^16.13.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.4"
   }
 }

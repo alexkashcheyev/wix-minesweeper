@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
+import { Box, Container, makeStyles } from '@material-ui/core';
+
 import Navbar from './components/Navbar';
 import Menu from './components/Menu';
-import { Box, Container } from '@material-ui/core';
 import Message from './components/Message';
-import { makeStyles } from '@material-ui/core'
 import Viewport from './components/Viewport';
 
 const useStyles = makeStyles((theme) => ({

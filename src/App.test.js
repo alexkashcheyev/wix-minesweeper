@@ -1,9 +1,17 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import { wrapComponent } from './shared/testutil';
+import App from './App';
+import { initialState } from './redux/store';
+
+describe('App component', () => {
+
+  it('Should create', () => {
+  
+    const { component, store } = wrapComponent(<App />, initialState);
+    
+    expect(component).toBeTruthy();
+  
+  });
+
 });

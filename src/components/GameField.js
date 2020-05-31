@@ -25,23 +25,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function buildCell({x, y, key, cell, classes, superman, stage, handleFlag, handleOpen}) {
-    return (
-        <Cell
-            className={classes.cell}
-            key={key}
-            cell={cell}
-            superman={superman}
-            size={config.cellSize}
-            revealMine={ stage === gameStage.LOST }
-            showFlagOnMine={ stage === gameStage.WON }
-            disabled={stage === gameStage.LOST || stage === gameStage.WON}
-            onFlag={() => handleFlag(x, y)}
-            onOpen={() => handleOpen(x, y)}
-        />
-    )
-}
-
 function buildColumns({ field, gameInfo, viewport, classes, superman, stage, handleFlag, handleOpen }) {
     return field
     
@@ -75,7 +58,20 @@ function buildColumns({ field, gameInfo, viewport, classes, superman, stage, han
                     // a unique key for reactjs
                     const key = fieldX + '_' + fieldY;
                     
-                    return buildCell({ x: fieldX, y: fieldY, key, cell, classes, superman, stage, handleFlag, handleOpen })
+                    return (
+                        <Cell
+                            className={classes.cell}
+                            key={key}
+                            cell={cell}
+                            superman={superman}
+                            size={config.cellSize}
+                            revealMine={stage === gameStage.LOST}
+                            showFlagOnMine={stage === gameStage.WON}
+                            disabled={stage === gameStage.LOST || stage === gameStage.WON}
+                            onFlag={() => handleFlag(x, y)}
+                            onOpen={() => handleOpen(x, y)}
+                        />
+                    )
                 });
 
             return (
