@@ -1,5 +1,5 @@
 import config from '../appconfig';
-import { clone } from 'lodash';
+import { cloneDeep } from 'lodash';
 
 
 export function generateField(gameInfo) {
@@ -18,10 +18,9 @@ export function generateField(gameInfo) {
     return field;
 }
 
-
 export function openCellsFrom(x, y, field) {
 
-    const newField = clone(field);
+    const newField = cloneDeep(field);
 
     // using BFS to open cells surrounding an empty cell
     const queue = [{ x, y }];
@@ -66,7 +65,7 @@ export function openCellsFrom(x, y, field) {
 
     }
 
-    console.log('max queue length was', maxQueueLen)
+    //console.log('max queue length was', maxQueueLen)
 
     return newField;
 }

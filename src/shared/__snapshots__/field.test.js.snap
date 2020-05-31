@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`openCellsFrom should not open cell neigbour if it is flagged 1`] = `
+Array [
+  Array [
+    Object {
+      "hasMine": true,
+      "isFlagged": false,
+      "isOpened": false,
+      "minesAround": null,
+    },
+    Object {
+      "hasMine": false,
+      "isFlagged": false,
+      "isOpened": true,
+      "minesAround": 1,
+    },
+    Object {
+      "hasMine": false,
+      "isFlagged": false,
+      "isOpened": true,
+      "minesAround": 0,
+    },
+  ],
+  Array [
+    Object {
+      "hasMine": false,
+      "isFlagged": true,
+      "isOpened": false,
+      "minesAround": 0,
+    },
+    Object {
+      "hasMine": false,
+      "isFlagged": false,
+      "isOpened": true,
+      "minesAround": 1,
+    },
+    Object {
+      "hasMine": false,
+      "isFlagged": false,
+      "isOpened": true,
+      "minesAround": 0,
+    },
+  ],
+  Array [
+    Object {
+      "hasMine": false,
+      "isFlagged": false,
+      "isOpened": true,
+      "minesAround": 0,
+    },
+    Object {
+      "hasMine": false,
+      "isFlagged": false,
+      "isOpened": true,
+      "minesAround": 0,
+    },
+    Object {
+      "hasMine": false,
+      "isFlagged": false,
+      "isOpened": true,
+      "minesAround": 0,
+    },
+  ],
+]
+`;

@@ -14,3 +14,49 @@ export function wrapComponent(unwrapped, state) {
 
     return { store, component };
 }
+
+export function countCells(field, test) {
+    return field.reduce(
+        (total, column) => {
+            return total + column.reduce(
+                (subTotal, cell) => {
+                    return subTotal + (test(cell) ? 1 : 0)
+                },
+                0
+            )
+        },
+        0
+    );
+}
+
+export function createField(template) {
+
+
+    // *        is mine
+    // F        is flag
+    // E        is flag on mine
+    // number   is mines around
+
+    const res = [];
+
+    for (let y in template) {
+        
+        for (let x in template[y]) {
+
+            if (typeof(res[x]) === 'undefined') {
+                res[x] = [];
+            }
+
+            const token = template[y].charAt(x);
+
+            res[x][y] = {
+                isOpened: false,
+                hasMine: token === '*' || token === 'E',
+                isFlagged: token === 'F' || token === 'E',
+                minesAround: token === '*' ? null : (parseInt(token) || 0)
+            }
+        }
+    }
+
+    return res;
+}

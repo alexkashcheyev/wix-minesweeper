@@ -2,7 +2,7 @@ import { takeEvery, put, select } from 'redux-saga/effects';
 import { gameStage, actionType } from '../enums';
 import * as actions from '../redux/actions';
 import { selectCurrentGame } from '../redux/selectors';
-import { clone } from 'lodash';
+import { cloneDeep } from 'lodash';
 
 function* workerSaga(action) {
     const { x, y } = action.payload;
@@ -11,7 +11,7 @@ function* workerSaga(action) {
     // Can't flag an opened cell
     if (field[x][y].isOpened) return;
 
-    const newField = clone(field);
+    const newField = cloneDeep(field);
 
     // Taking the flag off
     if (field[x][y].isFlagged) {
