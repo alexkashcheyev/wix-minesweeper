@@ -1,3 +1,7 @@
+# Demo
+
+https://alexkashcheyev.github.io/wix-minesweeper/
+
 # To start the game
 
 1. Click on the hamburger button.
