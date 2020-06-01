@@ -161,7 +161,7 @@ const rootReducer = (state = initialState, action) => {
                 currentGame: {
                     ...state.currentGame,
                     viewport: {
-                        ...viewport,
+                        ...state.currentGame.viewport,
                         ...action.payload
                     }
                 }
