@@ -39,9 +39,9 @@ export const initialState = {
     },
     newGame: {
         gameInfo: {
-            width: 300,
-            height: 300,
-            mines: 1
+            width: 8,
+            height: 8,
+            mines: 10
         }
     }
 }
