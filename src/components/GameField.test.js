@@ -3,7 +3,6 @@ import TestRenderer, { act } from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import { Provider }from 'react-redux';
 
-import { gameStage } from '../enums';
 import { initialState } from '../redux/store';
 import GameField from "./GameField";
 
@@ -19,7 +18,7 @@ describe('GameField component', () => {
         </Provider>
     )
 
-    const rerender = () => {
+    const update = () => {
         act(
             () => {
                 tr.update(wrappedJsx(store));
@@ -91,7 +90,7 @@ describe('GameField component', () => {
             }
         })
 
-        rerender();
+        update();
 
         expect(component).toMatchSnapshot();
         expect(component.children.length).toEqual(expectedWidth);

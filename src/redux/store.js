@@ -24,6 +24,8 @@ export const initialState = {
             height: 15,
             mines: 10
         },
+
+        //TODO: move higher in hierarchy
         viewport: {
             width: config.viewportWidth,
             height: config.viewportHeight,

@@ -1,0 +1,270 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Viewport component should also show minimap and navigation keys if game does not fit 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <div
+    className="MuiPaper-root makeStyles-panel-2 MuiPaper-outlined MuiPaper-rounded"
+  >
+    <div
+      className="makeStyles-stats-3"
+    >
+      <div
+        className="MuiTypography-root MuiTypography-h4 MuiTypography-colorSecondary"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M14.4 6l-.24-1.2c-.09-.46-.5-.8-.98-.8H6c-.55 0-1 .45-1 1v15c0 .55.45 1 1 1s1-.45 1-1v-6h5.6l.24 1.2c.09.47.5.8.98.8H19c.55 0 1-.45 1-1V7c0-.55-.45-1-1-1h-4.6z"
+          />
+        </svg>
+         × 
+        10
+      </div>
+    </div>
+    <div
+      className="makeStyles-minimap-4"
+    >
+      <div
+        className="MuiPaper-root makeStyles-root-15 makeStyles-root-17 MuiPaper-outlined"
+      >
+        <div
+          className="makeStyles-viewport-16 makeStyles-viewport-18"
+        >
+           
+        </div>
+      </div>
+      <span
+        className="MuiTypography-root MuiTypography-caption"
+      >
+        Minimap
+      </span>
+    </div>
+    <div
+      className="makeStyles-divider-5"
+    >
+       
+    </div>
+    <div
+      className="makeStyles-buttons-6"
+    >
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btnUp-8 Mui-disabled Mui-disabled"
+        disabled={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={-1}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.12 14.71L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L12.7 8.71a.9959.9959 0 00-1.41 0L6.7 13.3c-.39.39-.39 1.02 0 1.41.39.38 1.03.39 1.42 0z"
+              />
+            </svg>
+          </span>
+          W
+        </span>
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btnDown-9"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7a.9959.9959 0 010-1.41c.39-.38 1.03-.39 1.42 0z"
+              />
+            </svg>
+          </span>
+          S
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btnLeft-10 Mui-disabled Mui-disabled"
+        disabled={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={-1}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M14.71 15.88L10.83 12l3.88-3.88c.39-.39.39-1.02 0-1.41a.9959.9959 0 00-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.39.39-1.03 0-1.42z"
+              />
+            </svg>
+          </span>
+          A
+        </span>
+      </button>
+      <button
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btnRight-11"
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        <span
+          className="MuiButton-label"
+        >
+          <span
+            className="MuiButton-startIcon MuiButton-iconSizeMedium"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M9.29 15.88L13.17 12 9.29 8.12a.9959.9959 0 010-1.41c.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z"
+              />
+            </svg>
+          </span>
+          D
+        </span>
+        <span
+          className="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+  <div
+    className="makeStyles-fieldWrapper-7"
+  >
+    <div
+      className="makeStyles-root-12 makeStyles-root-19"
+    />
+  </div>
+</div>
+`;
+
+exports[`Viewport component should show only flag count if game has started, and game field fits 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <div
+    className="MuiPaper-root makeStyles-panel-2 MuiPaper-outlined MuiPaper-rounded"
+  >
+    <div
+      className="makeStyles-stats-3"
+    >
+      <div
+        className="MuiTypography-root MuiTypography-h4 MuiTypography-colorSecondary"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M14.4 6l-.24-1.2c-.09-.46-.5-.8-.98-.8H6c-.55 0-1 .45-1 1v15c0 .55.45 1 1 1s1-.45 1-1v-6h5.6l.24 1.2c.09.47.5.8.98.8H19c.55 0 1-.45 1-1V7c0-.55-.45-1-1-1h-4.6z"
+          />
+        </svg>
+         × 
+        10
+      </div>
+    </div>
+  </div>
+  <div
+    className="makeStyles-fieldWrapper-7"
+  >
+    <div
+      className="makeStyles-root-12 makeStyles-root-14"
+    />
+  </div>
+</div>
+`;
+
+exports[`Viewport component should show text if game was not started 1`] = `
+<h4
+  className="MuiTypography-root MuiTypography-h4"
+>
+  To start the game, click on the hamburger menu in the left upper corner, enter the desired parameters and click "Start" button.
+</h4>
+`;
