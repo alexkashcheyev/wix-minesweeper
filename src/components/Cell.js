@@ -108,6 +108,8 @@ function calculateContent(cell, classes, revealMines, showFlagOnMine) {
 
     // show mine icon if the cell has one and it is either open 
     // or the game has ended and all mines are revealed
+    // The image is hardcoded since GitHub Pages use https://me.github.com/projectname/ path,
+    // and reactjs links to the image as to /static/mine.6561ee48.svg 
 
     if (cell.hasMine && (cell.isOpened || revealMines)) {
         return (
