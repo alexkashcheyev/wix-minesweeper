@@ -112,7 +112,7 @@ function calculateContent(cell, classes, revealMines, showFlagOnMine) {
     if (cell.hasMine && (cell.isOpened || revealMines)) {
         return (
             <Icon className={classes.icon}>
-                <img src={Mine} height='100%' width='100%' alt='mine' />
+                <img src='https://alexkashcheyev.github.io/wix-minesweeper/static/media/mine.6561ee48.svg' height='100%' width='100%' alt='mine' />
             </Icon>
         )
     }
