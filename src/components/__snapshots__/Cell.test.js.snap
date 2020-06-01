@@ -121,7 +121,7 @@ exports[`Cell component should show mine icon if there is a mine and the cell is
     <img
       alt="mine"
       height="100%"
-      src={Object {}}
+      src="https://alexkashcheyev.github.io/wix-minesweeper/static/media/mine.6561ee48.svg"
       width="100%"
     />
   </span>
@@ -157,7 +157,7 @@ exports[`Cell component should show mine icon if there is a mine and the mines a
       <img
         alt="mine"
         height="100%"
-        src={Object {}}
+        src="https://alexkashcheyev.github.io/wix-minesweeper/static/media/mine.6561ee48.svg"
         width="100%"
       />
     </span>
