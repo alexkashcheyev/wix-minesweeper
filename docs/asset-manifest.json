@@ -12,7 +12,7 @@
     "service-worker.js": "/service-worker.js",
     "static/css/main.69eda509.chunk.css.map": "/static/css/main.69eda509.chunk.css.map",
     "static/js/2.db6e4c68.chunk.js.LICENSE.txt": "/static/js/2.db6e4c68.chunk.js.LICENSE.txt",
-    "static/media/mine.svg": "/static/media/mine.6561ee48.svg"
+    "static/media/mine.svg": "https://alexkashcheyev.github.io/wix-minesweeper/static/media/mine.6561ee48.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.f51f4073.js",
