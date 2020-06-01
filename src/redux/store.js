@@ -155,6 +155,19 @@ const rootReducer = (state = initialState, action) => {
             }
         }
 
+        case actionType.SET_VIEWPORT_SIZE: {
+            return {
+                ...state,
+                currentGame: {
+                    ...state.currentGame,
+                    viewport: {
+                        ...viewport,
+                        ...action.payload
+                    }
+                }
+            }
+        }
+
         default: return state;
     }
 }

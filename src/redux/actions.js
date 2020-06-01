@@ -1,4 +1,5 @@
 import { actionType } from '../enums';
+import { act } from 'react-test-renderer';
 
 // request to show or hide the menu
 export const toggleMenu = (show) => ({
@@ -72,4 +73,9 @@ export const setViewportOffset = (offset) => ({
 export const setGameStage = (stage) => ({
     type: actionType.SET_GAME_STAGE,
     payload: { stage }
+})
+
+export const setViewportSize = (width, height) => ({
+    type: actionType.SET_VIEWPORT_SIZE,
+    payload: { width, height }
 })
