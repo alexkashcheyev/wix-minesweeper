@@ -19,11 +19,6 @@ const defaultProps = {
     onFlag              : jest.fn()
 };
 
-function createCell(props) {
-    const tr = TestRenderer.create(<Cell {...props} />);
-    return tr.toJSON();
-}
-
 describe('Cell component', () => {
 
     it('Should create', () => {
@@ -129,3 +124,8 @@ describe('Cell component', () => {
     });
 
 });
+
+function createCell(props) {
+    const tr = TestRenderer.create(<Cell {...props} />);
+    return tr.toJSON();
+}
