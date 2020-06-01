@@ -58,12 +58,12 @@ describe('GameField component', () => {
     `('should take correct dimensions from viewport and/or field', ({
         viewportWidth, 
         viewportHeight, 
-        fieldWidth, 
-        fieldHeight, 
         expectedWidth, 
         expectedHeight
     }) => {
         
+        const fieldWidth = 5;
+        const fieldHeight = 5;
         // empty field would normally be invalid, but the 
         // component does not care about validity. 
 
@@ -72,12 +72,6 @@ describe('GameField component', () => {
             .map(
                 () => new Array(fieldHeight).fill({...defaultCell})
             );
-
-        const gameInfo = {
-            width: 5,
-            height: 5,
-            mines: 1
-        }
         
         store = mockStore({
             ...initialState,
