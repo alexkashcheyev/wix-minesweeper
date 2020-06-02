@@ -58,12 +58,12 @@ describe('Viewport component', () => {
                     width: 5,
                     height: 5
                 },
-                viewport: {
-                    ...initialState.currentGame.viewport,
-                    width: 10,
-                    height: 10
-                }
             },
+            viewport: {
+                ...initialState.currentGame.viewport,
+                width: 10,
+                height: 10
+            }
         });
 
         update();
@@ -83,7 +83,7 @@ describe('Viewport component', () => {
                     height: 10
                 },
                 viewport: {
-                    ...initialState.currentGame.viewport,
+                    ...initialState.viewport,
                     width: 5,
                     height: 5
                 }

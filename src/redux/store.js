@@ -25,19 +25,19 @@ export const initialState = {
             mines: 10
         },
 
-        //TODO: move higher in hierarchy
-        viewport: {
-            width: config.viewportWidth,
-            height: config.viewportHeight,
-            offset: {
-                x: 0,
-                y: 0
-            },
-        },
         stage: gameStage.NOT_STARTED,
         superman: true,
         flagsSet: 0,
         field: []
+    },
+    //TODO: move higher in hierarchy
+    viewport: {
+        width: config.viewportWidth,
+        height: config.viewportHeight,
+        offset: {
+            x: 0,
+            y: 0
+        },
     },
     newGame: {
         gameInfo: {
@@ -89,14 +89,14 @@ const rootReducer = (state = initialState, action) => {
                     ...action.payload,
                     flagsSet: 0,
                     stage: gameStage.LOADING,
-                    viewport: {
-                        ...state.currentGame.viewport,
-                        offset: {
-                            x: 0,
-                            y: 0
-                        }
-                    }
                 },
+                viewport: {
+                    ...state.viewport,
+                    offset: {
+                        x: 0,
+                        y: 0
+                    }
+                }
             }
 
         case actionType.SET_MESSAGE: {
@@ -139,10 +139,10 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 currentGame: {
                     ...state.currentGame,
-                    viewport: {
-                        ...state.currentGame.viewport,
-                        offset: action.payload.offset                        
-                    }
+                },
+                viewport: {
+                    ...state.viewport,
+                    offset: action.payload.offset                        
                 }
             }
         }
@@ -162,10 +162,10 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 currentGame: {
                     ...state.currentGame,
-                    viewport: {
-                        ...state.currentGame.viewport,
-                        ...action.payload
-                    }
+                },
+                viewport: {
+                    ...state.currentGame.viewport,
+                    ...action.payload
                 }
             }
         }

@@ -81,7 +81,7 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
         const handleKeyPress = (e) => {
             setTimeout(() => {
                 let change = false;
-    
+                
                 if (['KeyW', 'ArrowUp'].indexOf(e.code) >= 0) {
                     change = { dx: 0, dy: -1 }
                 } else if (['KeyS', 'ArrowDown'].indexOf(e.code) >= 0) {
@@ -91,7 +91,7 @@ function Viewport({ dispatch, viewport, gameInfo, stage, flagsSet }) {
                 } else if (['KeyD', 'ArrowRight'].indexOf(e.code) >= 0) {
                     change = { dx: 1, dy: 0 }
                 }
-    
+                
                 if (change) {
                     dispatch(actions.moveViewport(change.dx, change.dy))
                 }
@@ -233,6 +233,6 @@ function buildFieldBorder({ viewport, gameInfo }) {
     }
 }
 
-const mapStateToProps = (state) => state.currentGame;
+const mapStateToProps = (state) => ({...state.currentGame, viewport: state.viewport });
 
 export default connect(mapStateToProps)(Viewport);

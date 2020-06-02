@@ -171,8 +171,8 @@ exports[`Viewport component should also show minimap and navigation keys if game
         </span>
       </button>
       <button
-        className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btnRight-11"
-        disabled={false}
+        className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-btnRight-11 Mui-disabled Mui-disabled"
+        disabled={true}
         onBlur={[Function]}
         onClick={[Function]}
         onDragLeave={[Function]}
@@ -185,7 +185,7 @@ exports[`Viewport component should also show minimap and navigation keys if game
         onTouchEnd={[Function]}
         onTouchMove={[Function]}
         onTouchStart={[Function]}
-        tabIndex={0}
+        tabIndex={-1}
         type="button"
       >
         <span
@@ -207,9 +207,6 @@ exports[`Viewport component should also show minimap and navigation keys if game
           </span>
           D
         </span>
-        <span
-          className="MuiTouchRipple-root"
-        />
       </button>
     </div>
   </div>

@@ -105,7 +105,7 @@ function GameField({ field, dispatch, superman, gameInfo, viewport, stage, borde
 
 
 function mapStateToProps(state) {
-    return state.currentGame;
+    return { ...state.currentGame, viewport: state.viewport };
 }
 
 export default connect(mapStateToProps)(GameField)

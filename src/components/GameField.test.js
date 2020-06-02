@@ -82,11 +82,11 @@ describe('GameField component', () => {
                     width: fieldWidth,
                     height: fieldHeight,
                 },
-                viewport: {
-                    ...initialState.currentGame.viewport,
-                    width: viewportWidth,
-                    height: viewportHeight,
-                }
+            },
+            viewport: {
+                ...initialState.viewport,
+                width: viewportWidth,
+                height: viewportHeight,
             }
         })
 
